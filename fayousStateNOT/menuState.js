@@ -1,6 +1,8 @@
 var menuState = {
 	create: function() {
-		game.add.image(0, 0, 'menuBackground');
+		var bgImage = game.add.sprite(0, 0, 'menuBackground');
+		bgImage.width = game.width;
+		bgImage.height = game.height;
 
 		var nameLabel = game.add.text(game.width/2, 100, 'Plague Exodus', {font: '50px Helvetica', fill: '#ffffff'});
 		nameLabel.anchor.setTo(0.5, 0.5);
@@ -21,7 +23,7 @@ var menuState = {
 		this.bgMusic.loop = true;
 		this.bgMusic.play();
 
-		
+
 	},
 
 	start: function () {
