@@ -12,9 +12,20 @@ var playState = {
 		//Use global variable "playLevel" to select Level
 		switch (game.global.playLevel) {
 			//default will load first level
-			default: game.load.image('tileset-1', 'assets/platforms/set-1/tileset-1.png');
-			game.load.tilemap('map-1', 'assets/platforms/set-1/map-1.json', null, Phaser.Tilemap.TILED_JSON);
-			break;
+			default: case 1:
+				game.load.image('tileset-1', 'assets/platforms/set-1/tileset-1.png');
+				game.load.tilemap('map-1', 'assets/platforms/set-1/map-1.json', null, Phaser.Tilemap.TILED_JSON);
+				break;
+
+			case 2:
+				game.load.image('tileset-1', 'assets/platforms/set-1/tileset-1.png');
+				game.load.tilemap('map-2', 'assets/platforms/set-1/map-2.json', null, Phaser.Tilemap.TILED_JSON);
+				break;
+
+			case 3:
+				game.load.image('tileset-1', 'assets/platforms/set-1/tileset-1.png');
+				game.load.tilemap('map-3', 'assets/platforms/set-1/map-3.json', null, Phaser.Tilemap.TILED_JSON);
+				break;
 		}
 	},
 
@@ -41,13 +52,35 @@ var playState = {
 		this.sea.tileScale.set(1.1);
 		//Use global variable "playLevel" to select Level
 		switch (game.global.playLevel) {
-			default: this.map = game.add.tilemap('map-1');
-			this.map.addTilesetImage('tileset-1');
-			this.layer = this.map.createLayer('Tile Layer 1');
-			this.layer.resizeWorld();
-			this.layer2 = this.map.createLayer('Tile Layer 2');
-			this.map.setCollisionBetween(1, 1159, true, this.layer);
-			break;
+			default: case 1:
+				this.map = game.add.tilemap('map-1');
+				this.map.addTilesetImage('tileset-1');
+				this.layer2 = this.map.createLayer('Tile Layer 2');
+				this.layer = this.map.createLayer('Tile Layer 1');
+				this.layer.resizeWorld();
+				this.layer3 = this.map.createLayer('Tile Layer 3');
+				this.map.setCollisionBetween(1, 1159, true, this.layer);
+				break;
+
+			case 2:
+				this.map = game.add.tilemap('map-2');
+				this.map.addTilesetImage('tileset-1');
+				this.layer2 = this.map.createLayer('Tile Layer 2');
+				this.layer = this.map.createLayer('Tile Layer 1');
+				this.layer.resizeWorld();
+				this.layer3 = this.map.createLayer('Tile Layer 3');
+				this.map.setCollisionBetween(1, 1159, true, this.layer);
+				break;
+
+			case 3:
+				this.map = game.add.tilemap('map-3');
+				this.map.addTilesetImage('tileset-1');
+				this.layer2 = this.map.createLayer('Tile Layer 2');
+				this.layer = this.map.createLayer('Tile Layer 1');
+				this.layer.resizeWorld();
+				this.layer3 = this.map.createLayer('Tile Layer 3');
+				this.map.setCollisionBetween(1, 1159, true, this.layer);
+				break;
 		}
 		//Player must be place right here
 		this.player = game.add.sprite(16, 1880, "player");
@@ -71,7 +104,7 @@ var playState = {
 		this.movePlayer();
 		//Set parallex backgrounds
 		this.clouds.tilePosition.set(this.clouds.x * -0.1, 0);
-		this.sea.tilePosition.set(this.sea.x * -0.2, 0);
+		this.sea.tilePosition.set(this.sea.x * -0.15, 0);
 	},
 
 	movePlayer: function () {
