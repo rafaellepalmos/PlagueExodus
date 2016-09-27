@@ -19,6 +19,8 @@ var loadState = {
 		//// Audio
 		game.load.audio('Menu_Theme', ['assets/Soundtrack/Menu_Theme.mp3', 'assets/Soundtrack/Menu_Theme.ogg']);
 
+		//// Image
+		game.load.image('menuBackground', 'assets/menupicture.jpg');
 
 		//// Image
 		//		game.Load.image('menuBackground', 'assets/menubackground.whatever');
