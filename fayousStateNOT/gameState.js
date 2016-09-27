@@ -2,7 +2,6 @@ var game = new Phaser.Game(500, 340);
 
 game.global = {
 	//Globol variable
-	playLevel: 0 //keep track of Level
 };
 
 game.state.add('boot', bootState);

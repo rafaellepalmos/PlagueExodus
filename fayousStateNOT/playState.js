@@ -12,24 +12,25 @@ var playState = {
 		//Use global variable "playLevel" to select Level
 		switch (game.global.playLevel) {
 			//default will load first level
-			default: case 1:
+			default:
+			case 1:
 				game.load.image('tileset-1', 'assets/platforms/set-1/tileset-1.png');
-				game.load.tilemap('map-1', 'assets/platforms/set-1/map-1.json', null, Phaser.Tilemap.TILED_JSON);
-				break;
+			game.load.tilemap('map-1', 'assets/platforms/set-1/map-1.json', null, Phaser.Tilemap.TILED_JSON);
+			break;
 
-			case 2:
+		case 2:
 				game.load.image('tileset-1', 'assets/platforms/set-1/tileset-1.png');
-				game.load.tilemap('map-2', 'assets/platforms/set-1/map-2.json', null, Phaser.Tilemap.TILED_JSON);
-				break;
+			game.load.tilemap('map-2', 'assets/platforms/set-1/map-2.json', null, Phaser.Tilemap.TILED_JSON);
+			break;
 
-			case 3:
+		case 3:
 				game.load.image('tileset-1', 'assets/platforms/set-1/tileset-1.png');
-				game.load.tilemap('map-3', 'assets/platforms/set-1/map-3.json', null, Phaser.Tilemap.TILED_JSON);
-				break;
+			game.load.tilemap('map-3', 'assets/platforms/set-1/map-3.json', null, Phaser.Tilemap.TILED_JSON);
+			break;
 		}
 	},
 
-	 create: function () {
+	create: function () {
 		// this.enemies = game.add.group();
 		// //add physics to the gruop
 		// this.enemies.enableBody = true;
@@ -52,35 +53,36 @@ var playState = {
 		this.sea.tileScale.set(1.1);
 		//Use global variable "playLevel" to select Level
 		switch (game.global.playLevel) {
-			default: case 1:
+			default:
+			case 1:
 				this.map = game.add.tilemap('map-1');
-				this.map.addTilesetImage('tileset-1');
-				this.layer2 = this.map.createLayer('Tile Layer 2');
-				this.layer = this.map.createLayer('Tile Layer 1');
-				this.layer.resizeWorld();
-				this.layer3 = this.map.createLayer('Tile Layer 3');
-				this.map.setCollisionBetween(1, 1159, true, this.layer);
-				break;
+			this.map.addTilesetImage('tileset-1');
+			this.layer2 = this.map.createLayer('Tile Layer 2');
+			this.layer = this.map.createLayer('Tile Layer 1');
+			this.layer.resizeWorld();
+			this.layer3 = this.map.createLayer('Tile Layer 3');
+			this.map.setCollisionBetween(1, 1159, true, this.layer);
+			break;
 
-			case 2:
+		case 2:
 				this.map = game.add.tilemap('map-2');
-				this.map.addTilesetImage('tileset-1');
-				this.layer2 = this.map.createLayer('Tile Layer 2');
-				this.layer = this.map.createLayer('Tile Layer 1');
-				this.layer.resizeWorld();
-				this.layer3 = this.map.createLayer('Tile Layer 3');
-				this.map.setCollisionBetween(1, 1159, true, this.layer);
-				break;
+			this.map.addTilesetImage('tileset-1');
+			this.layer2 = this.map.createLayer('Tile Layer 2');
+			this.layer = this.map.createLayer('Tile Layer 1');
+			this.layer.resizeWorld();
+			this.layer3 = this.map.createLayer('Tile Layer 3');
+			this.map.setCollisionBetween(1, 1159, true, this.layer);
+			break;
 
-			case 3:
+		case 3:
 				this.map = game.add.tilemap('map-3');
-				this.map.addTilesetImage('tileset-1');
-				this.layer2 = this.map.createLayer('Tile Layer 2');
-				this.layer = this.map.createLayer('Tile Layer 1');
-				this.layer.resizeWorld();
-				this.layer3 = this.map.createLayer('Tile Layer 3');
-				this.map.setCollisionBetween(1, 1159, true, this.layer);
-				break;
+			this.map.addTilesetImage('tileset-1');
+			this.layer2 = this.map.createLayer('Tile Layer 2');
+			this.layer = this.map.createLayer('Tile Layer 1');
+			this.layer.resizeWorld();
+			this.layer3 = this.map.createLayer('Tile Layer 3');
+			this.map.setCollisionBetween(1, 1159, true, this.layer);
+			break;
 		}
 		//Player must be place right here
 		this.player = game.add.sprite(16, 1880, "player");
@@ -119,11 +121,13 @@ var playState = {
 			this.player.body.velocity.y = -320;
 		}
 	},
-render: function () {
+
+	render: function () {
 		game.debug.bodyInfo(this.player, 32, 32);
 	},
-addEnemy: function () {
-	var enemy = this.enemies.getFirstDead();
+
+	addEnemy: function () {
+		var enemy = this.enemies.getFirstDead();
 		enemy.anchor.setTo(0.5, 0.5);
 		enemy.reset(100, 1884);
 		enemy.body.gravity.y = 500;
@@ -131,6 +135,5 @@ addEnemy: function () {
 		enemy.body.bounce.x = 1;
 		enemy.checkWorldBounds = true;
 		enemy.outOfBoundsKill = true;
-		}
 	}
 }
