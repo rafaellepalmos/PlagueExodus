@@ -18,7 +18,15 @@ var playState = {
 		}
 	},
 
-	create: function () {
+	 create: function () {
+		// this.enemies = game.add.group();
+		// //add physics to the gruop
+		// this.enemies.enableBody = true;
+		// //Create enemies
+		// this.enemies.createMultiple(1, 'enemy');
+		// this.addEnemy();
+		// extra stuff, remove later
+
 		//Kill loading label and progressbar when it's done
 		this.loadingLabel.kill();
 		this.progressBar.kill();
@@ -58,6 +66,7 @@ var playState = {
 	update: function () {
 		//Set player collides with layer 1 of tilemap
 		game.physics.arcade.collide(this.player, this.layer);
+		game.physics.arcade.collide(this.enemies, this.layer);
 		//Call movePlayer function
 		this.movePlayer();
 		//Set parallex backgrounds
@@ -75,6 +84,20 @@ var playState = {
 		}
 		if (this.cursor.up.isDown) {
 			this.player.body.velocity.y = -320;
+		}
+	},
+render: function () {
+		game.debug.bodyInfo(this.player, 32, 32);
+	},
+addEnemy: function () {
+	var enemy = this.enemies.getFirstDead();
+		enemy.anchor.setTo(0.5, 0.5);
+		enemy.reset(100, 1884);
+		enemy.body.gravity.y = 500;
+		enemy.body.velocity.x = 100;
+		enemy.body.bounce.x = 1;
+		enemy.checkWorldBounds = true;
+		enemy.outOfBoundsKill = true;
 		}
 	}
 }

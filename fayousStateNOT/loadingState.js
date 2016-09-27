@@ -14,6 +14,7 @@ var loadState = {
 		game.load.image('cloud', 'assets/platforms/set-1/clouds.png');
 		game.load.image('sky', 'assets/platforms/set-1/sky.png');
 		game.load.image('sea', 'assets/platforms/set-1/sea.png');
+		game.load.image('enemy', 'assets/enemy.png');
 
 		//// Image
 		//		game.Load.image('menuBackground', 'assets/menubackground.whatever');
