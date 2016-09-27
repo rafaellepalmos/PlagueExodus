@@ -15,9 +15,15 @@ var menuState = {
 		var upKey = game.input.keyboard.addKey(Phaser.Keyboard.UP);
 		upKey.onDown.add(this.start, this);
 
+		this.bgMusic = game.add.audio('Menu_Theme');
+		this.bgMusic.loop = true;
+		this.bgMusic.play();
+
+		
 	},
 
 	start: function () {
+		this.bgMusic.stop();
 		game.state.start('play');
 	}
 };
