@@ -16,6 +16,10 @@ var loadState = {
 		game.load.image('sea', 'assets/platforms/set-1/sea.png');
 		game.load.image('enemy', 'assets/enemy.png');
 
+		//// Audio
+		game.load.audio('Menu_Theme', ['assets/Soundtrack/Menu_Theme.mp3', 'assets/Soundtrack/Menu_Theme.ogg']);
+
+
 		//// Image
 		//		game.Load.image('menuBackground', 'assets/menubackground.whatever');
 		//		game.Load.image('treeBackground', 'assets/treeBackground.whatever');
