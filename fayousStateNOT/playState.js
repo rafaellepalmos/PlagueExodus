@@ -89,9 +89,11 @@ var playState = {
 		//add animation from atlas
 		this.player.animations.add('left', ['male_melee_left01', 'male_melee_left02', 'male_melee_left03', 'male_melee_left04', 'male_melee_left05', 'male_melee_left06', 'male_melee_left07', 'male_melee_left08', 'male_melee_left09'], 8, true);
 		this.player.animations.add('right', ['male_melee_right01', 'male_melee_right02', 'male_melee_right03', 'male_melee_right04', 'male_melee_right05', 'male_melee_right06', 'male_melee_right07', 'male_melee_right08', 'male_melee_right09'], 8, true);
+		this.player.animations.add('attackleft', ['male_melee_slashleft01', 'male_melee_slashleft02', 'male_melee_slashleft03', 'male_melee_slashleft04', 'male_melee_slashleft05', 'male_melee_slashleft06'], 8, false);
+		this.player.animations.add('attackright', ['male_melee_slashright01', 'male_melee_slashright02', 'male_melee_slashright03', 'male_melee_slashright04', 'male_melee_slashright05', 'male_melee_slashright06'], 8, false);
 		this.player.anchor.setTo(0.5, 0.5);
 		game.physics.arcade.enable(this.player);
-		this.player.body.gravity.y = 500;
+		this.player.body.gravity.y = 700;
 		//set player collide world bounds top, right, left only
 		this.player.body.collideWorldBounds = true;
 		game.physics.arcade.checkCollision.down = false;
@@ -99,6 +101,9 @@ var playState = {
 		game.camera.follow(this.player);
 		//cursor input
 		this.cursor = game.input.keyboard.createCursorKeys();
+		
+		//mouse
+		this.input.mouse.capture = true;
 		
 		//variable to store player orientation
 		game.global.lastdir = '';
@@ -116,28 +121,54 @@ var playState = {
 	},
 
 	movePlayer: function () {
+		//if player is pressing left
 		if (this.cursor.left.isDown) {
-			game.global.lastdir = 'left';
+			console.log("going left");//to debug
+			game.global.lastdir = 'left';//last direction player was facing
 			this.player.body.velocity.x = -200;
 			this.player.animations.play('left');//left animation
-		} else if (this.cursor.right.isDown) {
-			game.global.lastdir = 'right';
+		}
+		//else if player is pressing right
+		else if (this.cursor.right.isDown) {
+			console.log("going right");//to debug
+			game.global.lastdir = 'right';//last direction player was facing
 			this.player.body.velocity.x = 200;
 			this.player.animations.play('right');//right animation
-		} else {
-			this.player.body.velocity.x = 0;
+		}
+		//else if player is clicking attack key
+		else if (this.input.keyboard.isDown(Phaser.Keyboard.ONE)) {
+			console.log("mouse clicked");//to debug
+			//check if player is facing left
+			if (game.global.lastdir == 'left'){
+				this.player.animations.play('attackleft');//attack facing left
+			}
+			//check if player is facing right
+			else if (game.global.lastdir == 'right') {
+				this.player.animations.play('attackright');//attack facing right
+			}
+			//default: do nothing
+			else {
+				return;
+			}
+		}
+		//if left or right or attack are not being pressed/clicked, go to else:
+		else {
+			this.player.body.velocity.x = 0;//stop moving
+			
 			//check which direction the character is facing
 			if (game.global.lastdir == 'left'){
 				this.player.frameName = 'male_melee_left01';//idle facing left
 			}
 			else if (game.global.lastdir == 'right') {
 				this.player.frameName = 'male_melee_right01';//idle facing right
-			} else {
+			}
+			else {
 				this.player.frameName = 'male_melee_alive01';//else idle facing front
 			}
 		}
-		if (this.cursor.up.isDown) {
-			this.player.body.velocity.y = -320;
+		//check if jump button is pressed
+		if (this.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR) && this.player.body.onFloor()) {
+			this.player.body.velocity.y = -300;
 		}
 	},
 
