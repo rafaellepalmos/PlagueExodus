@@ -85,7 +85,10 @@ var playState = {
 			break;
 		}
 		//Player must be place right here
-		this.player = game.add.sprite(16, 1880, "player");
+		this.player = game.add.sprite(16, 1880, 'atlas', 'male_melee_right01');//change to atlas
+		//add animation from atlas
+		this.player.animations.add('left', ['male_melee_left01', 'male_melee_left02', 'male_melee_left03', 'male_melee_left04', 'male_melee_left05', 'male_melee_left06', 'male_melee_left07', 'male_melee_left08', 'male_melee_left09'], 8, true);
+		this.player.animations.add('right', ['male_melee_right01', 'male_melee_right02', 'male_melee_right03', 'male_melee_right04', 'male_melee_right05', 'male_melee_right06', 'male_melee_right07', 'male_melee_right08', 'male_melee_right09'], 8, true);
 		this.player.anchor.setTo(0.5, 0.5);
 		game.physics.arcade.enable(this.player);
 		this.player.body.gravity.y = 500;
@@ -96,6 +99,9 @@ var playState = {
 		game.camera.follow(this.player);
 		//cursor input
 		this.cursor = game.input.keyboard.createCursorKeys();
+		
+		//variable to store player orientation
+		game.global.lastdir = '';
 	},
 
 	update: function () {
@@ -111,11 +117,24 @@ var playState = {
 
 	movePlayer: function () {
 		if (this.cursor.left.isDown) {
+			game.global.lastdir = 'left';
 			this.player.body.velocity.x = -200;
+			this.player.animations.play('left');//left animation
 		} else if (this.cursor.right.isDown) {
+			game.global.lastdir = 'right';
 			this.player.body.velocity.x = 200;
+			this.player.animations.play('right');//right animation
 		} else {
 			this.player.body.velocity.x = 0;
+			//check which direction the character is facing
+			if (game.global.lastdir == 'left'){
+				this.player.frameName = 'male_melee_left01';//idle facing left
+			}
+			else if (game.global.lastdir == 'right') {
+				this.player.frameName = 'male_melee_right01';//idle facing right
+			} else {
+				this.player.frameName = 'male_melee_alive01';//else idle facing front
+			}
 		}
 		if (this.cursor.up.isDown) {
 			this.player.body.velocity.y = -320;
