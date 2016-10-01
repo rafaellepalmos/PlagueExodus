@@ -8,6 +8,7 @@ var loadState = {
 		this.progressBar.anchor.setTo(0.5, 0.5);
 		game.load.setPreloadSprite(this.progressBar);
 		//game.load.spritesheet('player', 'assets/player2.png', 20, 20);
+		//player atlas
 		game.load.atlasJSONArray('atlas', 'assets/male_melee.png', 'assets/male_melee.json');
 		//all assets can be initialized here
 
