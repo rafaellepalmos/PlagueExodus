@@ -86,27 +86,33 @@ var playState = {
 		}
 		//Player must be place right here
 		this.player = game.add.sprite(16, 1880, 'atlas', 'male_melee_right01');//change to atlas
+		
 		//add animation from atlas
 		this.player.animations.add('left', ['male_melee_left01', 'male_melee_left02', 'male_melee_left03', 'male_melee_left04', 'male_melee_left05', 'male_melee_left06', 'male_melee_left07', 'male_melee_left08', 'male_melee_left09'], 8, true);
 		this.player.animations.add('right', ['male_melee_right01', 'male_melee_right02', 'male_melee_right03', 'male_melee_right04', 'male_melee_right05', 'male_melee_right06', 'male_melee_right07', 'male_melee_right08', 'male_melee_right09'], 8, true);
 		this.player.animations.add('attackleft', ['male_melee_slashleft01', 'male_melee_slashleft02', 'male_melee_slashleft03', 'male_melee_slashleft04', 'male_melee_slashleft05', 'male_melee_slashleft06'], 8, false);
 		this.player.animations.add('attackright', ['male_melee_slashright01', 'male_melee_slashright02', 'male_melee_slashright03', 'male_melee_slashright04', 'male_melee_slashright05', 'male_melee_slashright06'], 8, false);
+		this.player.animations.add('reviving', ['male_melee_dead05', 'male_melee_dead04', 'male_melee_dead03', 'male_melee_dead02', 'male_melee_dead01', 'male_melee_alive01'], 8, false);
+		
 		this.player.anchor.setTo(0.5, 0.5);
 		game.physics.arcade.enable(this.player);
 		this.player.body.gravity.y = 700;
+		
 		//set player collide world bounds top, right, left only
 		this.player.body.collideWorldBounds = true;
 		game.physics.arcade.checkCollision.down = false;
+		
 		//set camera follow the player
 		game.camera.follow(this.player);
+		
 		//cursor input
 		this.cursor = game.input.keyboard.createCursorKeys();
 		
-		//mouse
-		this.input.mouse.capture = true;
-		
 		//variable to store player orientation
 		game.global.lastdir = '';
+		
+		//variable to store last key pressed
+		game.global.lastkey = '';
 	},
 
 	update: function () {
@@ -118,15 +124,40 @@ var playState = {
 		//Set parallex backgrounds
 		this.clouds.tilePosition.set(this.clouds.x * -0.1, 0);
 		this.sea.tilePosition.set(this.sea.x * -0.15, 0);
+		
+		if (!this.player.inWorld) {
+			console.log("player fell out of bounds");
+			this.playerDie();
+		}
 	},
 
 	movePlayer: function () {
-		//if player is pressing left
-		if (this.cursor.left.isDown) {
+		//if player is clicking attack key
+		if (this.input.keyboard.isDown(Phaser.Keyboard.ONE)) {
+			game.global.lastkey = 'ONE';
+			console.log("attacking");//to debug
+			//check if player is facing left
+			if (game.global.lastdir == 'left'){
+				this.player.animations.play('attackleft');//attack facing left
+				this.player.animations.currentAnim.onComplete.add(function () {	game.global.lastkey = 'LEFT';}, this);//idle right after animation finishes
+			}
+			//check if player is facing right
+			else if (game.global.lastdir == 'right') {
+				this.player.animations.play('attackright');//attack facing right
+				this.player.animations.currentAnim.onComplete.add(function () {game.global.lastkey = 'RIGHT';}, this);//idle right after animation finishes
+			}
+			//default: do nothing
+			else {
+				return;
+			}
+		}
+		//else if player is pressing left
+		else if (this.cursor.left.isDown) {
 			console.log("going left");//to debug
 			game.global.lastdir = 'left';//last direction player was facing
 			this.player.body.velocity.x = -200;
 			this.player.animations.play('left');//left animation
+			game.global.lastkey = 'LEFT';
 		}
 		//else if player is pressing right
 		else if (this.cursor.right.isDown) {
@@ -134,42 +165,32 @@ var playState = {
 			game.global.lastdir = 'right';//last direction player was facing
 			this.player.body.velocity.x = 200;
 			this.player.animations.play('right');//right animation
-		}
-		//else if player is clicking attack key
-		else if (this.input.keyboard.isDown(Phaser.Keyboard.ONE)) {
-			console.log("mouse clicked");//to debug
-			//check if player is facing left
-			if (game.global.lastdir == 'left'){
-				this.player.animations.play('attackleft');//attack facing left
-			}
-			//check if player is facing right
-			else if (game.global.lastdir == 'right') {
-				this.player.animations.play('attackright');//attack facing right
-			}
-			//default: do nothing
-			else {
-				return;
-			}
+			game.global.lastkey = 'RIGHT';
 		}
 		//if left or right or attack are not being pressed/clicked, go to else:
 		else {
 			this.player.body.velocity.x = 0;//stop moving
 			
 			//check which direction the character is facing
-			if (game.global.lastdir == 'left'){
+			if (game.global.lastdir == 'left' && game.global.lastkey == 'LEFT'){
 				this.player.frameName = 'male_melee_left01';//idle facing left
 			}
-			else if (game.global.lastdir == 'right') {
+			else if (game.global.lastdir == 'right' && game.global.lastkey == 'RIGHT') {
 				this.player.frameName = 'male_melee_right01';//idle facing right
 			}
-			else {
+			/*else {
 				this.player.frameName = 'male_melee_alive01';//else idle facing front
-			}
+			}*/
 		}
 		//check if jump button is pressed
 		if (this.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR) && this.player.body.onFloor()) {
 			this.player.body.velocity.y = -300;
 		}
+	},
+	
+	playerDie: function() {
+		this.player.reset(16, 1880);
+		this.player.animations.play('reviving');
 	},
 
 	render: function () {
