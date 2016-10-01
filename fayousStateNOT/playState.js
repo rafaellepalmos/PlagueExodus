@@ -92,7 +92,7 @@ var playState = {
 		this.player.animations.add('right', ['male_melee_right01', 'male_melee_right02', 'male_melee_right03', 'male_melee_right04', 'male_melee_right05', 'male_melee_right06', 'male_melee_right07', 'male_melee_right08', 'male_melee_right09'], 8, true);
 		this.player.animations.add('attackleft', ['male_melee_slashleft01', 'male_melee_slashleft02', 'male_melee_slashleft03', 'male_melee_slashleft04', 'male_melee_slashleft05', 'male_melee_slashleft06'], 8, false);
 		this.player.animations.add('attackright', ['male_melee_slashright01', 'male_melee_slashright02', 'male_melee_slashright03', 'male_melee_slashright04', 'male_melee_slashright05', 'male_melee_slashright06'], 8, false);
-		this.player.animations.add('reviving', ['male_melee_dead05', 'male_melee_dead04', 'male_melee_dead03', 'male_melee_dead02', 'male_melee_dead01', 'male_melee_alive01'], 8, false);
+		this.player.animations.add('respawn', ['male_melee_dead05', 'male_melee_dead04', 'male_melee_dead03', 'male_melee_dead02', 'male_melee_dead01', 'male_melee_alive01'], 8, false);
 		
 		this.player.anchor.setTo(0.5, 0.5);
 		game.physics.arcade.enable(this.player);
@@ -128,6 +128,7 @@ var playState = {
 		if (!this.player.inWorld) {
 			console.log("player fell out of bounds");
 			this.playerDie();
+			game.global.lastkey = 'dead';
 		}
 	},
 
@@ -170,7 +171,7 @@ var playState = {
 		//if left or right or attack are not being pressed/clicked, go to else:
 		else {
 			this.player.body.velocity.x = 0;//stop moving
-			
+			console.log("idle");//to debug
 			//check which direction the character is facing
 			if (game.global.lastdir == 'left' && game.global.lastkey == 'LEFT'){
 				this.player.frameName = 'male_melee_left01';//idle facing left
@@ -189,8 +190,9 @@ var playState = {
 	},
 	
 	playerDie: function() {
-		this.player.reset(16, 1880);
-		this.player.animations.play('reviving');
+		this.player.reset(16, 1880);//reset player to original location
+		game.camera.flash(0xffffff, 300);//flash a camera upon respawn
+		this.player.animations.play('respawn');//play respawn animation
 	},
 
 	render: function () {
