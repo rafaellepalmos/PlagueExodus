@@ -14,18 +14,23 @@ var playState = {
 			//default will load first level
 			default:
 			case 1:
-				game.load.image('tileset-1', 'assets/platforms/set-1/tileset-1.png');
+			game.load.image('tileset-1', 'assets/platforms/set-1/tileset-1.png');
 			game.load.tilemap('map-1', 'assets/platforms/set-1/map-1.json', null, Phaser.Tilemap.TILED_JSON);
 			break;
 
-		case 2:
-				game.load.image('tileset-1', 'assets/platforms/set-1/tileset-1.png');
+			case 2:
+			game.load.image('tileset-1', 'assets/platforms/set-1/tileset-1.png');
 			game.load.tilemap('map-2', 'assets/platforms/set-1/map-2.json', null, Phaser.Tilemap.TILED_JSON);
 			break;
 
-		case 3:
-				game.load.image('tileset-1', 'assets/platforms/set-1/tileset-1.png');
+			case 3:
+			game.load.image('tileset-1', 'assets/platforms/set-1/tileset-1.png');
 			game.load.tilemap('map-3', 'assets/platforms/set-1/map-3.json', null, Phaser.Tilemap.TILED_JSON);
+			break;
+
+			case 4:
+			game.load.image('tileset-1', 'assets/platforms/set-1/tileset-1.png');
+			game.load.tilemap('map-4', 'assets/platforms/set-1/map-4Puzzle.json', null, Phaser.Tilemap.TILED_JSON);
 			break;
 		}
 	},
@@ -55,37 +60,55 @@ var playState = {
 		switch (game.global.playLevel) {
 			default:
 			case 1:
-				this.map = game.add.tilemap('map-1');
+			this.map = game.add.tilemap('map-1');
 			this.map.addTilesetImage('tileset-1');
 			this.layer2 = this.map.createLayer('Tile Layer 2');
 			this.layer = this.map.createLayer('Tile Layer 1');
 			this.layer.resizeWorld();
 			this.layer3 = this.map.createLayer('Tile Layer 3');
 			this.map.setCollisionBetween(1, 1159, true, this.layer);
+			this.playerBirthPlaceX = 16;
+			this.playerBirthPlaceY = 1880;
 			break;
 
-		case 2:
-				this.map = game.add.tilemap('map-2');
+			case 2:
+			this.map = game.add.tilemap('map-2');
 			this.map.addTilesetImage('tileset-1');
 			this.layer2 = this.map.createLayer('Tile Layer 2');
 			this.layer = this.map.createLayer('Tile Layer 1');
 			this.layer.resizeWorld();
 			this.layer3 = this.map.createLayer('Tile Layer 3');
 			this.map.setCollisionBetween(1, 1159, true, this.layer);
+			this.playerBirthPlaceX = 16;
+			this.playerBirthPlaceY = 1880;
 			break;
 
-		case 3:
-				this.map = game.add.tilemap('map-3');
+			case 3:
+			this.map = game.add.tilemap('map-3');
 			this.map.addTilesetImage('tileset-1');
 			this.layer2 = this.map.createLayer('Tile Layer 2');
 			this.layer = this.map.createLayer('Tile Layer 1');
 			this.layer.resizeWorld();
 			this.layer3 = this.map.createLayer('Tile Layer 3');
 			this.map.setCollisionBetween(1, 1159, true, this.layer);
+			this.playerBirthPlaceX = 16;
+			this.playerBirthPlaceY = 1880;
+			break;
+
+			case 4:
+			this.map = game.add.tilemap('map-4');
+			this.map.addTilesetImage('tileset-1');
+			this.layer2 = this.map.createLayer('Tile Layer 2');
+			this.layer = this.map.createLayer('Tile Layer 1');
+			this.layer.resizeWorld();
+			this.layer3 = this.map.createLayer('Tile Layer 3');
+			this.map.setCollisionBetween(1, 1159, true, this.layer);
+			this.playerBirthPlaceX = 1740;
+			this.playerBirthPlaceY = 7965;
 			break;
 		}
 		//Player must be place right here
-		this.player = game.add.sprite(16, 1880, 'atlas', 'male_melee_right01');//change to atlas
+		this.player = game.add.sprite(this.playerBirthPlaceX, this.playerBirthPlaceY, 'atlas', 'male_melee_right01');//change to atlas
 		//add animation from atlas
 		this.player.animations.add('left', ['male_melee_left01', 'male_melee_left02', 'male_melee_left03', 'male_melee_left04', 'male_melee_left05', 'male_melee_left06', 'male_melee_left07', 'male_melee_left08', 'male_melee_left09'], 8, true);
 		this.player.animations.add('right', ['male_melee_right01', 'male_melee_right02', 'male_melee_right03', 'male_melee_right04', 'male_melee_right05', 'male_melee_right06', 'male_melee_right07', 'male_melee_right08', 'male_melee_right09'], 8, true);
@@ -99,7 +122,7 @@ var playState = {
 		game.camera.follow(this.player);
 		//cursor input
 		this.cursor = game.input.keyboard.createCursorKeys();
-		
+
 		//variable to store player orientation
 		game.global.lastdir = '';
 	},
