@@ -1,0 +1,204 @@
+{"frames": [
+
+{
+	"filename": "curupira_attackleft01",
+	"frame": {"x":0,"y":0,"w":42,"h":71},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":42,"h":71},
+	"sourceSize": {"w":42,"h":71}
+},
+{
+	"filename": "curupira_attackleft02",
+	"frame": {"x":0,"y":71,"w":43,"h":70},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":43,"h":70},
+	"sourceSize": {"w":43,"h":70}
+},
+{
+	"filename": "curupira_attackleft03",
+	"frame": {"x":0,"y":141,"w":44,"h":68},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":44,"h":68},
+	"sourceSize": {"w":44,"h":68}
+},
+{
+	"filename": "curupira_attackleft04",
+	"frame": {"x":0,"y":209,"w":47,"h":47},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":47,"h":47},
+	"sourceSize": {"w":47,"h":47}
+},
+{
+	"filename": "curupira_attackright01",
+	"frame": {"x":0,"y":256,"w":42,"h":71},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":42,"h":71},
+	"sourceSize": {"w":42,"h":71}
+},
+{
+	"filename": "curupira_attackright02",
+	"frame": {"x":0,"y":327,"w":43,"h":70},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":43,"h":70},
+	"sourceSize": {"w":43,"h":70}
+},
+{
+	"filename": "curupira_attackright03",
+	"frame": {"x":0,"y":397,"w":44,"h":68},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":44,"h":68},
+	"sourceSize": {"w":44,"h":68}
+},
+{
+	"filename": "curupira_attackright04",
+	"frame": {"x":0,"y":465,"w":47,"h":47},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":47,"h":47},
+	"sourceSize": {"w":47,"h":47}
+},
+{
+	"filename": "curupira_deadleft01",
+	"frame": {"x":0,"y":512,"w":42,"h":74},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":42,"h":74},
+	"sourceSize": {"w":42,"h":74}
+},
+{
+	"filename": "curupira_deadleft02",
+	"frame": {"x":0,"y":586,"w":45,"h":48},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":45,"h":48},
+	"sourceSize": {"w":45,"h":48}
+},
+{
+	"filename": "curupira_deadright01",
+	"frame": {"x":0,"y":634,"w":42,"h":74},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":42,"h":74},
+	"sourceSize": {"w":42,"h":74}
+},
+{
+	"filename": "curupira_deadright02",
+	"frame": {"x":0,"y":708,"w":45,"h":48},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":45,"h":48},
+	"sourceSize": {"w":45,"h":48}
+},
+{
+	"filename": "curupira_left01",
+	"frame": {"x":0,"y":756,"w":43,"h":69},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":43,"h":69},
+	"sourceSize": {"w":43,"h":69}
+},
+{
+	"filename": "curupira_left02",
+	"frame": {"x":0,"y":825,"w":41,"h":71},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":41,"h":71},
+	"sourceSize": {"w":41,"h":71}
+},
+{
+	"filename": "curupira_left03",
+	"frame": {"x":0,"y":896,"w":40,"h":73},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":40,"h":73},
+	"sourceSize": {"w":40,"h":73}
+},
+{
+	"filename": "curupira_left04",
+	"frame": {"x":0,"y":969,"w":41,"h":72},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":41,"h":72},
+	"sourceSize": {"w":41,"h":72}
+},
+{
+	"filename": "curupira_left05",
+	"frame": {"x":0,"y":1041,"w":48,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":48,"h":64},
+	"sourceSize": {"w":48,"h":64}
+},
+{
+	"filename": "curupira_left06",
+	"frame": {"x":0,"y":1105,"w":48,"h":69},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":48,"h":69},
+	"sourceSize": {"w":48,"h":69}
+},
+{
+	"filename": "curupira_right01",
+	"frame": {"x":0,"y":1174,"w":43,"h":69},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":43,"h":69},
+	"sourceSize": {"w":43,"h":69}
+},
+{
+	"filename": "curupira_right02",
+	"frame": {"x":0,"y":1243,"w":41,"h":71},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":41,"h":71},
+	"sourceSize": {"w":41,"h":71}
+},
+{
+	"filename": "curupira_right03",
+	"frame": {"x":0,"y":1314,"w":40,"h":73},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":40,"h":73},
+	"sourceSize": {"w":40,"h":73}
+},
+{
+	"filename": "curupira_right04",
+	"frame": {"x":0,"y":1387,"w":41,"h":72},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":41,"h":72},
+	"sourceSize": {"w":41,"h":72}
+},
+{
+	"filename": "curupira_right05",
+	"frame": {"x":0,"y":1459,"w":48,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":48,"h":64},
+	"sourceSize": {"w":48,"h":64}
+},
+{
+	"filename": "curupira_right06",
+	"frame": {"x":0,"y":1523,"w":48,"h":69},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":48,"h":69},
+	"sourceSize": {"w":48,"h":69}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "curupira.png",
+	"format": "RGBA8888",
+	"size": {"w":48,"h":1592},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:15dcaf2ce3932f0b717eb10cf5bf612c:58c59c4e82dce707c041938a22d2011a:e5451f2175b15d5d0d9683f810a0d00e$"
+}
+}

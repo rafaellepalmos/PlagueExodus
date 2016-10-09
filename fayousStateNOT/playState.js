@@ -85,7 +85,7 @@ var playState = {
 			break;
 		}
 		//Player must be place right here
-		this.player = game.add.sprite(16, 1880, 'atlas', 'male_melee_right01');//change to atlas
+		this.player = game.add.sprite(16, 1880, 'player', 'male_melee_right01');//change to atlas
 		
 		//add animation from atlas
 		this.player.animations.add('left', ['male_melee_left01', 'male_melee_left02', 'male_melee_left03', 'male_melee_left04', 'male_melee_left05', 'male_melee_left06', 'male_melee_left07', 'male_melee_left08', 'male_melee_left09'], 8, true);
@@ -93,6 +93,7 @@ var playState = {
 		this.player.animations.add('attackleft', ['male_melee_slashleft01', 'male_melee_slashleft02', 'male_melee_slashleft03', 'male_melee_slashleft04', 'male_melee_slashleft05', 'male_melee_slashleft06'], 8, false);
 		this.player.animations.add('attackright', ['male_melee_slashright01', 'male_melee_slashright02', 'male_melee_slashright03', 'male_melee_slashright04', 'male_melee_slashright05', 'male_melee_slashright06'], 8, false);
 		this.player.animations.add('respawn', ['male_melee_dead05', 'male_melee_dead04', 'male_melee_dead03', 'male_melee_dead02', 'male_melee_dead01', 'male_melee_alive01'], 8, false);
+		//this.player.animations.add('die', ['male_melee_alive01', 'male_melee_dead01', 'male_melee_dead02', 'male_melee_dead03', 'male_melee_dead04', 'male_melee_dead05'], 8, false);
 		
 		this.player.anchor.setTo(0.5, 0.5);
 		game.physics.arcade.enable(this.player);
@@ -101,6 +102,20 @@ var playState = {
 		//set player collide world bounds top, right, left only
 		this.player.body.collideWorldBounds = true;
 		game.physics.arcade.checkCollision.down = false;
+		
+		//add enemies
+		this.addEnemy();//add enemy to map
+		this.moveEnemy();//move the enemy back and forth
+		
+		//particles for blood explosion
+		this.emitter = game.add.emitter(0, 0, 15); //create emitter with x,y,# of particles
+		this.emitter.makeParticles('blood');// Set blood for the particles
+		// Set the x and y speed of the particles between -150 and 150
+		this.emitter.setYSpeed(-150, 150);
+		this.emitter.setXSpeed(-150, 150);
+		// Scale the particles from 2 time their size to 0 in 800ms
+		this.emitter.setScale(2, 0, 2, 0, 800);// Parameters are: startX, endX, startY, endY, duration
+		this.emitter.gravity = 0;// Use no gravity
 		
 		//set camera follow the player
 		game.camera.follow(this.player);
@@ -119,15 +134,25 @@ var playState = {
 		//Set player collides with layer 1 of tilemap
 		game.physics.arcade.collide(this.player, this.layer);
 		game.physics.arcade.collide(this.enemies, this.layer);
+		game.physics.arcade.collide(this.enemy01, this.layer);
+		
 		//Call movePlayer function
 		this.movePlayer();
+		
+		//to keep the enemies moving
+		this.moveEnemy();
+		
+		//player collides with enemies
+		//game.physics.arcade.collide(this.player, this.enemy01);
+		game.physics.arcade.overlap(this.player, this.enemies, this.playerDie, null, this);
+		
 		//Set parallex backgrounds
 		this.clouds.tilePosition.set(this.clouds.x * -0.1, 0);
 		this.sea.tilePosition.set(this.sea.x * -0.15, 0);
 		
 		if (!this.player.inWorld) {
 			console.log("player fell out of bounds");
-			this.playerDie();
+			this.playerRespawn();
 			game.global.lastkey = 'dead';
 		}
 	},
@@ -144,6 +169,16 @@ var playState = {
 			}
 			//check if player is facing right
 			else if (game.global.lastdir == 'right') {
+				var d = this.enemy01.position.x - this.player.position.x;
+				if (d < 100) {
+					game.time.events.add(Phaser.Timer.SECOND * .25, function(){
+						this.enemy01.kill();
+						// Set the position of the emitter
+						this.emitter.x = this.enemy01.x;
+						this.emitter.y = this.enemy01.y;
+						this.emitter.start(true, 800, null, 15);// Start the emitter by exploding 15 particles that will live 800ms
+					}, this);
+				}
 				this.player.animations.play('attackright');//attack facing right
 				this.player.animations.currentAnim.onComplete.add(function () {game.global.lastkey = 'RIGHT';}, this);//idle right after animation finishes
 			}
@@ -190,16 +225,80 @@ var playState = {
 	},
 	
 	playerDie: function() {
+		this.playerRespawn();
+	},
+	
+	playerRespawn: function() {
 		this.player.reset(16, 1880);//reset player to original location
 		game.camera.flash(0xffffff, 300);//flash a camera upon respawn
 		this.player.animations.play('respawn');//play respawn animation
+	},
+	
+	addEnemy: function() {
+		this.enemies = game.add.group();
+		
+		switch (game.global.playLevel) {
+			default:
+			case 1:
+			
+			break;
+
+			case 2:
+			
+			//add enemy
+			this.enemy01 = game.add.sprite(800, 1880, 'enemy01', 'curupira_left01');
+			this.enemies.add(this.enemy01);//add to group
+			
+			//add animation from atlas
+			this.enemy01.animations.add('enemy01_left', ['curupira_left01', 'curupira_left02', 'curupira_left03', 'curupira_left04', 'curupira_left05', 'curupira_left06'], 8, true);
+			this.enemy01.animations.add('enemy01_right', ['curupira_right01', 'curupira_right02', 'curupira_right03', 'curupira_right04', 'curupira_right05', 'curupira_right06'], 8, true);
+			this.enemy01.animations.add('enemy01_deadleft', ['curupira_deadleft01', 'curupira_deadleft02'], 8, false);
+			this.enemy01.animations.add('enemy01_deadright', ['curupira_deadright01', 'curupira_deadright02'], 8, false);
+			
+			this.enemy01.anchor.setTo(0.5, 0.5);
+			game.physics.arcade.enable(this.enemy01);
+			this.enemy01.body.gravity.y = 700;
+			this.enemy01.body.collideWorldBounds = true;//make the enemy collide with the borders of the game
+			this.enemy01.body.immovable = true;//so the player can't push them
+			
+			break;
+
+			case 3:
+			break;
+		}
+	},
+	
+	moveEnemy: function(){
+		
+		switch (game.global.playLevel) {
+			default:
+			case 1:
+			
+			break;
+
+			case 2:
+			
+			if (this.enemy01.position.x  < 401) {
+				this.enemy01.animations.play('enemy01_right');
+				this.enemy01.body.velocity.x = 100;
+			}
+			else if (this.enemy01.position.x > 799) {
+				this.enemy01.animations.play('enemy01_left');
+				this.enemy01.body.velocity.x = -100;
+			}
+			
+			break;
+
+			case 3:
+			break;
+		}
 	},
 
 	render: function () {
 		game.debug.bodyInfo(this.player, 32, 32);
 	},
 
-	addEnemy: function () {
+	/*addEnemy: function () {
 		var enemy = this.enemies.getFirstDead();
 		enemy.anchor.setTo(0.5, 0.5);
 		enemy.reset(100, 1884);
@@ -208,5 +307,5 @@ var playState = {
 		enemy.body.bounce.x = 1;
 		enemy.checkWorldBounds = true;
 		enemy.outOfBoundsKill = true;
-	}
+	}*/
 }

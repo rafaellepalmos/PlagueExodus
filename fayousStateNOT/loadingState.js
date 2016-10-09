@@ -7,10 +7,14 @@ var loadState = {
 		this.progressBar = game.add.sprite(game.width/2, 200, 'progressBar');
 		this.progressBar.anchor.setTo(0.5, 0.5);
 		game.load.setPreloadSprite(this.progressBar);
-		//game.load.spritesheet('player', 'assets/player2.png', 20, 20);
-		//player atlas
-		game.load.atlasJSONArray('atlas', 'assets/male_melee.png', 'assets/male_melee.json');
 		//all assets can be initialized here
+		
+		//player atlas
+		game.load.atlasJSONArray('player', 'assets/male_melee.png', 'assets/male_melee.json');
+		
+		//enemy01 atlas
+		game.load.atlasJSONArray('enemy01', 'assets/curupira.png', 'assets/curupira.json');
+		game.load.image('blood', 'assets/blood.png');
 
 		//asset for play state
 		game.load.image('cloud', 'assets/platforms/set-1/clouds.png');
