@@ -37,24 +37,15 @@ var playState = {
 		//create map before create player
 		this.drawMap();
 		//Player must be place right here
-<<<<<<< HEAD
-		this.player = game.add.sprite(16, 1880, 'player', 'male_melee_right01');//change to atlas
-		
-=======
-		this.player = game.add.sprite(this.playerBirthPlaceX, this.playerBirthPlaceY, 'atlas', 'male_melee_right01'); //change to atlas
->>>>>>> 38a5c5c133009b1d5ad094dbad2a4a1a79a09162
+		//this.player = game.add.sprite(16, 1880, 'player', 'male_melee_right01');//change to atlas
+		this.player = game.add.sprite(this.playerBirthPlaceX, this.playerBirthPlaceY, 'player', 'male_melee_right01'); //change to atlas
 		//add animation from atlas
-		this.player.animations.add('left', ['male_melee_left01', 'male_melee_left02', 'male_melee_left03', 'male_melee_left04', 'male_melee_left05', 'male_melee_left06', 'male_melee_left07', 'male_melee_left08', 'male_melee_left09'], 8, true);
+		this.player.animations.add('left', ['male_melee_left01', 'male_melee_left02', 'male_melee_left03', 'male_melee_left04', 'male_melee_left05','male_melee_left06', 'male_melee_left07', 'male_melee_left08', 'male_melee_left09'], 8, true);
 		this.player.animations.add('right', ['male_melee_right01', 'male_melee_right02', 'male_melee_right03', 'male_melee_right04', 'male_melee_right05', 'male_melee_right06', 'male_melee_right07', 'male_melee_right08', 'male_melee_right09'], 8, true);
 		this.player.animations.add('attackleft', ['male_melee_slashleft01', 'male_melee_slashleft02', 'male_melee_slashleft03', 'male_melee_slashleft04', 'male_melee_slashleft05', 'male_melee_slashleft06'], 8, false);
 		this.player.animations.add('attackright', ['male_melee_slashright01', 'male_melee_slashright02', 'male_melee_slashright03', 'male_melee_slashright04', 'male_melee_slashright05', 'male_melee_slashright06'], 8, false);
 		this.player.animations.add('respawn', ['male_melee_dead05', 'male_melee_dead04', 'male_melee_dead03', 'male_melee_dead02', 'male_melee_dead01', 'male_melee_alive01'], 8, false);
-<<<<<<< HEAD
-		//this.player.animations.add('die', ['male_melee_alive01', 'male_melee_dead01', 'male_melee_dead02', 'male_melee_dead03', 'male_melee_dead04', 'male_melee_dead05'], 8, false);
-		
-=======
 
->>>>>>> 38a5c5c133009b1d5ad094dbad2a4a1a79a09162
 		this.player.anchor.setTo(0.5, 0.5);
 		game.physics.arcade.enable(this.player);
 		this.player.body.gravity.y = 700;
@@ -62,7 +53,6 @@ var playState = {
 		//set player collide world bounds top, right, left only
 		this.player.body.collideWorldBounds = true;
 		game.physics.arcade.checkCollision.down = false;
-<<<<<<< HEAD
 		
 		//add enemies
 		this.addEnemy();//add enemy to map
@@ -77,10 +67,7 @@ var playState = {
 		// Scale the particles from 2 time their size to 0 in 800ms
 		this.emitter.setScale(2, 0, 2, 0, 800);// Parameters are: startX, endX, startY, endY, duration
 		this.emitter.gravity = 0;// Use no gravity
-		
-=======
 
->>>>>>> 38a5c5c133009b1d5ad094dbad2a4a1a79a09162
 		//set camera follow the player
 		game.camera.follow(this.player);
 
@@ -135,7 +122,6 @@ var playState = {
 			}
 			//check if player is facing right
 			else if (game.global.lastdir == 'right') {
-<<<<<<< HEAD
 				var d = this.enemy01.position.x - this.player.position.x;
 				if (d < 100) {
 					game.time.events.add(Phaser.Timer.SECOND * .25, function(){
@@ -148,12 +134,6 @@ var playState = {
 				}
 				this.player.animations.play('attackright');//attack facing right
 				this.player.animations.currentAnim.onComplete.add(function () {game.global.lastkey = 'RIGHT';}, this);//idle right after animation finishes
-=======
-				this.player.animations.play('attackright'); //attack facing right
-				this.player.animations.currentAnim.onComplete.add(function () {
-					game.global.lastkey = 'RIGHT';
-				}, this); //idle right after animation finishes
->>>>>>> 38a5c5c133009b1d5ad094dbad2a4a1a79a09162
 			}
 			//default: do nothing
 			else {
@@ -195,23 +175,16 @@ var playState = {
 			this.player.body.velocity.y = -300;
 		}
 	},
-<<<<<<< HEAD
 	
 	playerDie: function() {
 		this.playerRespawn();
 	},
 	
 	playerRespawn: function() {
-		this.player.reset(16, 1880);//reset player to original location
+		this.player.reset(this.playerBirthPlaceX, this.playerBirthPlaceY); //reset player to original location
+		//this.player.reset(16, 1880);//reset player to original location
 		game.camera.flash(0xffffff, 300);//flash a camera upon respawn
 		this.player.animations.play('respawn');//play respawn animation
-=======
-
-	playerDie: function () {
-		this.player.reset(this.playerBirthPlaceX, this.playerBirthPlaceY); //reset player to original location
-		game.camera.flash(0xffffff, 300); //flash a camera upon respawn
-		this.player.animations.play('respawn'); //play respawn animation
->>>>>>> 38a5c5c133009b1d5ad094dbad2a4a1a79a09162
 	},
 	
 	addEnemy: function() {
@@ -276,20 +249,6 @@ var playState = {
 
 	render: function () {
 		game.debug.bodyInfo(this.player, 32, 32);
-	},
-
-	/*addEnemy: function () {
-		var enemy = this.enemies.getFirstDead();
-		enemy.anchor.setTo(0.5, 0.5);
-		enemy.reset(100, 1884);
-		enemy.body.gravity.y = 500;
-		enemy.body.velocity.x = 100;
-		enemy.body.bounce.x = 1;
-		enemy.checkWorldBounds = true;
-		enemy.outOfBoundsKill = true;
-<<<<<<< HEAD
-	}*/
-=======
 	},
 
 	loadMap: function(){
@@ -378,5 +337,4 @@ var playState = {
 		}
 		return;
 	},
->>>>>>> 38a5c5c133009b1d5ad094dbad2a4a1a79a09162
 }
