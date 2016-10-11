@@ -48,7 +48,7 @@ var playState = {
 
 		this.player.anchor.setTo(0.5, 0.5);
 		game.physics.arcade.enable(this.player);
-		this.player.body.gravity.y = 700;
+		this.player.body.gravity.y = 700; //used to be 700
 
 		//set player collide world bounds top, right, left only
 		this.player.body.collideWorldBounds = true;
@@ -180,7 +180,7 @@ var playState = {
 		}
 		//check if jump button is pressed
 		if (this.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR) && this.player.body.onFloor()) {
-			this.player.body.velocity.y = -300;
+			this.player.body.velocity.y = -400;
 		}
 	},
 	
@@ -296,6 +296,16 @@ var playState = {
 				game.load.image('tileset-1', 'assets/platforms/set-1/tileset-1.png');
 				game.load.tilemap('map-4', 'assets/platforms/set-1/map-4Puzzle.json', null, Phaser.Tilemap.TILED_JSON);
 				break;
+		
+			case 5:
+				game.load.image('tileset-1', 'assets/platforms/set-1/tileset-1.png');
+				game.load.tilemap('map-5', 'assets/platforms/set-1/map-4aPuzzle.json', null, Phaser.Tilemap.TILED_JSON);
+				break;
+
+			case 6:
+				game.load.image('tileset-1', 'assets/platforms/set-1/tileset-1.png');
+				game.load.tilemap('map-6', 'assets/platforms/set-1/map-4bPuzzle.json', null, Phaser.Tilemap.TILED_JSON);
+				break;
 		}
 		return;
 	},
@@ -353,8 +363,33 @@ var playState = {
 				this.map.setCollisionBetween(1, 1159, true, this.layer);
 				this.playerBirthPlaceX = 1740;
 				this.playerBirthPlaceY = 7965;
-				this.deadLine = 2100;
+				this.deadLine = 15000;
 				break;
+
+			case 5:
+				this.map = game.add.tilemap('map-5');
+				this.map.addTilesetImage('tileset-1');
+				this.layer2 = this.map.createLayer('Tile Layer 2');
+				this.layer = this.map.createLayer('Tile Layer 1');
+				this.layer.resizeWorld();
+				this.layer3 = this.map.createLayer('Tile Layer 3');
+				this.map.setCollisionBetween(1, 1159, true, this.layer);
+				this.playerBirthPlaceX = 1082.67;
+				this.playerBirthPlaceY = 1245;
+				this.deadLine = 150000;
+				break;
+			case 6:
+				this.map = game.add.tilemap('map-6');
+				this.map.addTilesetImage('tileset-1');
+				this.layer2 = this.map.createLayer('Tile Layer 2');
+				this.layer = this.map.createLayer('Tile Layer 1');
+				this.layer.resizeWorld();
+				this.layer3 = this.map.createLayer('Tile Layer 3');
+				this.map.setCollisionBetween(1, 1159, true, this.layer);
+				this.playerBirthPlaceX = 2704;
+				this.playerBirthPlaceY = 1533;
+				this.deadLine = 15000;
+				break;			
 		}
 		return;
 	},
