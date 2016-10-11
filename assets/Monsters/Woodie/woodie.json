@@ -1,0 +1,108 @@
+{"frames": [
+
+{
+	"filename": "Woodie_left_01",
+	"frame": {"x":84,"y":102,"w":42,"h":52},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":42,"h":52},
+	"sourceSize": {"w":42,"h":52}
+},
+{
+	"filename": "Woodie_left_02",
+	"frame": {"x":41,"y":51,"w":42,"h":51},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":42,"h":51},
+	"sourceSize": {"w":42,"h":51}
+},
+{
+	"filename": "Woodie_left_03",
+	"frame": {"x":42,"y":0,"w":42,"h":48},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":42,"h":48},
+	"sourceSize": {"w":42,"h":48}
+},
+{
+	"filename": "Woodie_left_04",
+	"frame": {"x":0,"y":51,"w":41,"h":51},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":41,"h":51},
+	"sourceSize": {"w":41,"h":51}
+},
+{
+	"filename": "Woodie_left_05",
+	"frame": {"x":0,"y":154,"w":42,"h":52},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":42,"h":52},
+	"sourceSize": {"w":42,"h":52}
+},
+{
+	"filename": "Woodie_left_06",
+	"frame": {"x":42,"y":154,"w":40,"h":55},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":40,"h":55},
+	"sourceSize": {"w":40,"h":55}
+},
+{
+	"filename": "Woodie_right_01",
+	"frame": {"x":42,"y":102,"w":42,"h":52},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":42,"h":52},
+	"sourceSize": {"w":42,"h":52}
+},
+{
+	"filename": "Woodie_right_02",
+	"frame": {"x":83,"y":51,"w":42,"h":51},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":42,"h":51},
+	"sourceSize": {"w":42,"h":51}
+},
+{
+	"filename": "Woodie_right_03",
+	"frame": {"x":0,"y":0,"w":42,"h":48},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":42,"h":48},
+	"sourceSize": {"w":42,"h":48}
+},
+{
+	"filename": "Woodie_right_04",
+	"frame": {"x":84,"y":0,"w":41,"h":51},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":41,"h":51},
+	"sourceSize": {"w":41,"h":51}
+},
+{
+	"filename": "Woodie_right_05",
+	"frame": {"x":0,"y":102,"w":42,"h":52},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":42,"h":52},
+	"sourceSize": {"w":42,"h":52}
+},
+{
+	"filename": "Woodie_right_06",
+	"frame": {"x":82,"y":154,"w":40,"h":55},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":40,"h":55},
+	"sourceSize": {"w":40,"h":55}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "woodie.png",
+	"format": "RGBA8888",
+	"size": {"w":126,"h":209},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:365a9acb7f540e4c2b8c9b13e6293201:9ffcdd14a35ea113e7bba1c8bb022c1b:ea9edf67f981871f3eba057c2d3e999c$"
+}
+}

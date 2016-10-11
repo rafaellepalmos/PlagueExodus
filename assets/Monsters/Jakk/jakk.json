@@ -1,0 +1,124 @@
+{"frames": [
+
+{
+	"filename": "Jakk_left_01",
+	"frame": {"x":0,"y":0,"w":46,"h":82},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":46,"h":82},
+	"sourceSize": {"w":46,"h":82}
+},
+{
+	"filename": "Jakk_left_02",
+	"frame": {"x":46,"y":0,"w":52,"h":77},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":52,"h":77},
+	"sourceSize": {"w":52,"h":77}
+},
+{
+	"filename": "Jakk_left_03",
+	"frame": {"x":98,"y":0,"w":52,"h":77},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":52,"h":77},
+	"sourceSize": {"w":52,"h":77}
+},
+{
+	"filename": "Jakk_left_04",
+	"frame": {"x":150,"y":0,"w":65,"h":94},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":65,"h":94},
+	"sourceSize": {"w":65,"h":94}
+},
+{
+	"filename": "Jakk_left_05",
+	"frame": {"x":0,"y":94,"w":70,"h":63},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":70,"h":63},
+	"sourceSize": {"w":70,"h":63}
+},
+{
+	"filename": "Jakk_left_06",
+	"frame": {"x":70,"y":94,"w":63,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":63,"h":64},
+	"sourceSize": {"w":63,"h":64}
+},
+{
+	"filename": "Jakk_left_07",
+	"frame": {"x":133,"y":94,"w":64,"h":61},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":61},
+	"sourceSize": {"w":64,"h":61}
+},
+{
+	"filename": "Jakk_right_01",
+	"frame": {"x":0,"y":158,"w":46,"h":82},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":46,"h":82},
+	"sourceSize": {"w":46,"h":82}
+},
+{
+	"filename": "Jakk_right_02",
+	"frame": {"x":46,"y":158,"w":52,"h":77},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":52,"h":77},
+	"sourceSize": {"w":52,"h":77}
+},
+{
+	"filename": "Jakk_right_03",
+	"frame": {"x":98,"y":158,"w":52,"h":77},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":52,"h":77},
+	"sourceSize": {"w":52,"h":77}
+},
+{
+	"filename": "Jakk_right_04",
+	"frame": {"x":150,"y":158,"w":65,"h":94},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":65,"h":94},
+	"sourceSize": {"w":65,"h":94}
+},
+{
+	"filename": "Jakk_right_05",
+	"frame": {"x":0,"y":252,"w":70,"h":63},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":70,"h":63},
+	"sourceSize": {"w":70,"h":63}
+},
+{
+	"filename": "Jakk_right_06",
+	"frame": {"x":70,"y":252,"w":63,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":63,"h":64},
+	"sourceSize": {"w":63,"h":64}
+},
+{
+	"filename": "Jakk_right_07",
+	"frame": {"x":133,"y":252,"w":64,"h":61},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":61},
+	"sourceSize": {"w":64,"h":61}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "jakk.png",
+	"format": "RGBA8888",
+	"size": {"w":215,"h":316},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:73203d33a60dfadd72792e64d7541d5e:1c68e70c1b91d26576d8721e4d68b826:686e1c3b496d574fa7b0aa7af0ed2a31$"
+}
+}
