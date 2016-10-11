@@ -54,6 +54,13 @@ var playState = {
 		this.player.body.collideWorldBounds = true;
 		game.physics.arcade.checkCollision.down = false;
 		
+		//add player health
+		this.health = game.add.sprite(10, 1670, 'health', 'health10');//add health sprite
+		this.health.anchor.setTo(0, 0);//set anchor to top right
+		this.health.fixedToCamera = true;//fix it to camera
+		this.health.cameraOffset.setTo(10, 10);//set the location of health in relation to the camera
+		game.global.playerhp = 10;
+		
 		//add enemies
 		this.addEnemy();//add enemy to map
 		this.moveEnemy();//move the enemy back and forth
@@ -103,6 +110,7 @@ var playState = {
 
 		if (!this.player.inWorld || this.player.y > this.deadLine) {
 			console.log("player fell out of bounds");
+			game.global.playerhp = 0;
 			this.playerRespawn();
 			game.global.lastkey = 'dead';
 		}
@@ -178,6 +186,15 @@ var playState = {
 	
 	playerDie: function() {
 		this.playerRespawn();
+		game.global.playerhp -= 1;
+		if (game.global.playerhp > 0){
+			console.log("Health: " + game.global.playerhp);
+			this.health.frameName = 'health' + game.global.playerhp;
+		}
+		else {
+			game.global.playerhp =10;
+			this.health.frameName = 'health10';
+		}
 	},
 	
 	playerRespawn: function() {
@@ -185,6 +202,10 @@ var playState = {
 		//this.player.reset(16, 1880);//reset player to original location
 		game.camera.flash(0xffffff, 300);//flash a camera upon respawn
 		this.player.animations.play('respawn');//play respawn animation
+		if (game.global.playerhp == 0) {
+			game.global.playerhp =10;
+			this.health.frameName = 'health10';
+		}
 	},
 	
 	addEnemy: function() {

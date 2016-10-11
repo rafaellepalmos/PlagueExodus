@@ -11,6 +11,7 @@ var loadState = {
 		
 		//player atlas
 		game.load.atlasJSONArray('player', 'assets/male_melee.png', 'assets/male_melee.json');
+		game.load.atlasJSONArray('health', 'assets/health.png', 'assets/health.json');
 		
 		//enemy01 atlas
 		game.load.atlasJSONArray('enemy01', 'assets/curupira.png', 'assets/curupira.json');
