@@ -596,6 +596,9 @@ var playState = {
 				break;
 
 			case 5:
+				this.sky = game.add.tileSprite(0, 0, game.width, game.height, 'sky_dark');
+				this.clouds = game.add.tileSprite(0, 100, game.width, 236, 'cloud_dark');
+				this.sea = game.add.tileSprite(0, 250, game.width, 96, 'sea_dark');
 				this.map = game.add.tilemap('map-5');
 				this.map.addTilesetImage('tileset-1');
 				this.layer2 = this.map.createLayer('Tile Layer 2');
@@ -610,7 +613,11 @@ var playState = {
 				this.bgMusic.loop = true;
 				this.bgMusic.play();
 				break;
+
 			case 6:
+				this.sky = game.add.tileSprite(0, 0, game.width, game.height, 'sky_dark');
+				this.clouds = game.add.tileSprite(0, 100, game.width, 236, 'cloud_dark');
+				this.sea = game.add.tileSprite(0, 250, game.width, 96, 'sea_dark');
 				this.map = game.add.tilemap('map-6');
 				this.map.addTilesetImage('tileset-1');
 				this.layer2 = this.map.createLayer('Tile Layer 2');
