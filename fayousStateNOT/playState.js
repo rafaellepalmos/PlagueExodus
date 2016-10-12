@@ -166,7 +166,7 @@ var playState = {
 					case 1:
 
 					//attacking boss
-					if ((this.playerAttack < game.time.now)&&(game.global.bossdist<100)) {
+					if ((this.boss.alive)&&(this.playerAttack < game.time.now)&&(game.global.bossdist<100)) {
 
 						if (game.global.bossHP == 1000) {
 							this.boss.kill();
@@ -348,7 +348,7 @@ var playState = {
 			this.enemy01.body.immovable = true;//so the player can't push them
 
 			//add enemy02
-			this.enemy02 = game.add.sprite(1200, 1741, 'banshee', 'banshee_left_01');
+			this.enemy02 = game.add.sprite(5570, 1500, 'banshee', 'banshee_left_01');
 			this.enemies.add(this.enemy02);//add to group
 			//add animation from atlas
 			this.enemy02.animations.add('enemy02_left', ['banshee_left_01', 'banshee_left_02', 'banshee_left_03', 'banshee_left_04', 'banshee_left_05', 'banshee_left_06'], 8, true);
@@ -361,7 +361,7 @@ var playState = {
 			this.enemy02.body.immovable = true;//so the player can't push them
 
 			//add boss
-			this.boss = game.add.sprite(2300, 1559, 'boss', 'pope_normal_idle_left_01');
+			this.boss = game.add.sprite(6620, 1479, 'boss', 'pope_normal_idle_left_01');
 			this.boss.anchor.setTo(0.5, 0.5);
 			game.physics.arcade.enable(this.boss);
 			this.boss.body.immovable = true;//so the player can't push them
@@ -419,11 +419,11 @@ var playState = {
 			}
 
 			//move enemy02
-			if (this.enemy02.position.x  < 1201) {
+			if (this.enemy02.position.x  < 5571) {
 				this.enemy02.animations.play('enemy02_right');
 				this.enemy02.body.velocity.x = 100;
 			}
-			else if (this.enemy02.position.x > 1499) {
+			else if (this.enemy02.position.x > 5829) {
 				this.enemy02.animations.play('enemy02_left');
 				this.enemy02.body.velocity.x = -100;
 			}
@@ -496,7 +496,7 @@ var playState = {
 
 			case 4:
 				game.load.image('tileset-1', 'assets/platforms/set-1/tileset-1.png');
-				game.load.tilemap('map-4', 'assets/platforms/set-1/map-4Puzzle.json', null, Phaser.Tilemap.TILED_JSON);
+				game.load.tilemap('map-4', 'assets/platforms/set-1/Level4Puzzle.json', null, Phaser.Tilemap.TILED_JSON);
 				break;
 
 			case 5:
@@ -538,6 +538,10 @@ var playState = {
 				this.chest.anchor.setTo(0.5, 1);
 				this.chestOpened = false;
 				game.physics.arcade.enable(this.chest);
+				//adding music
+				this.bgMusic = game.add.audio('Level_1');
+				this.bgMusic.loop = true;
+				this.bgMusic.play();
 				break;
 
 			case 2:
@@ -586,6 +590,9 @@ var playState = {
 				this.playerBirthPlaceX = 1740;
 				this.playerBirthPlaceY = 7965;
 				this.deadLine = 15000;
+				this.bgMusic = game.add.audio('Level_4');
+				this.bgMusic.loop = true;
+				this.bgMusic.play();
 				break;
 
 			case 5:
@@ -599,6 +606,9 @@ var playState = {
 				this.playerBirthPlaceX = 1082.67;
 				this.playerBirthPlaceY = 1245;
 				this.deadLine = 150000;
+				this.bgMusic = game.add.audio('Level_5');
+				this.bgMusic.loop = true;
+				this.bgMusic.play();
 				break;
 			case 6:
 				this.map = game.add.tilemap('map-6');
