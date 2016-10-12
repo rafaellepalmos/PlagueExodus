@@ -92,7 +92,7 @@ var playState = {
 		//Set player collides with layer 1 of tilemap
 		game.physics.arcade.collide(this.player, this.layer);
 		game.physics.arcade.collide(this.enemies, this.layer);
-		game.physics.arcade.collide(this.enemy01, this.layer);
+		//game.physics.arcade.collide(this.enemy01, this.layer);
 		
 		//Call movePlayer function
 		this.movePlayer();
@@ -130,18 +130,29 @@ var playState = {
 			}
 			//check if player is facing right
 			else if (game.global.lastdir == 'right') {
-				var d = this.enemy01.position.x - this.player.position.x;
-				if (d < 100) {
-					game.time.events.add(Phaser.Timer.SECOND * .25, function(){
-						this.enemy01.kill();
-						// Set the position of the emitter
-						this.emitter.x = this.enemy01.x;
-						this.emitter.y = this.enemy01.y;
-						this.emitter.start(true, 800, null, 15);// Start the emitter by exploding 15 particles that will live 800ms
-					}, this);
+				switch (game.global.playLevel) {
+					default:
+					case 1:
+					break;
+
+					case 2:
+						var d = this.enemy01.position.x - this.player.position.x;
+						if (d < 100) {
+							game.time.events.add(Phaser.Timer.SECOND * .25, function(){
+								this.enemy01.kill();
+								// Set the position of the emitter
+								this.emitter.x = this.enemy01.x;
+								this.emitter.y = this.enemy01.y;
+								this.emitter.start(true, 800, null, 15);// Start the emitter by exploding 15 particles that will live 800ms
+							}, this);
+						}
+						this.player.animations.play('attackright');//attack facing right
+						this.player.animations.currentAnim.onComplete.add(function () {game.global.lastkey = 'RIGHT';}, this);//idle right after animation finishes
+						break;
+
+					case 3:
+					break;
 				}
-				this.player.animations.play('attackright');//attack facing right
-				this.player.animations.currentAnim.onComplete.add(function () {game.global.lastkey = 'RIGHT';}, this);//idle right after animation finishes
 			}
 			//default: do nothing
 			else {

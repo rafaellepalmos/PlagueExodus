@@ -13,7 +13,9 @@ var loadState = {
 		game.load.atlasJSONArray('player', 'assets/male_melee.png', 'assets/male_melee.json');
 		game.load.atlasJSONArray('health', 'assets/health.png', 'assets/health.json');
 		
-		//enemy01 atlas
+		//enemy atlas
+		game.load.atlasJSONArray('boss', 'assets/pope_normal.png', 'assets/pope_normal.json');
+		game.load.atlasJSONArray('lightning', 'assets/lightning.png', 'assets/lightning.json');
 		game.load.atlasJSONArray('enemy01', 'assets/curupira.png', 'assets/curupira.json');
 		game.load.image('blood', 'assets/blood.png');
 

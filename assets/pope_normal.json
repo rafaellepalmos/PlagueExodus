@@ -1,0 +1,124 @@
+{"frames": [
+
+{
+	"filename": "pope_normal_attack_left_01",
+	"frame": {"x":113,"y":277,"w":114,"h":94},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":114,"h":94},
+	"sourceSize": {"w":114,"h":94}
+},
+{
+	"filename": "pope_normal_attack_left_02",
+	"frame": {"x":114,"y":92,"w":114,"h":92},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":114,"h":92},
+	"sourceSize": {"w":114,"h":92}
+},
+{
+	"filename": "pope_normal_attack_left_03",
+	"frame": {"x":0,"y":92,"w":114,"h":92},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":114,"h":92},
+	"sourceSize": {"w":114,"h":92}
+},
+{
+	"filename": "pope_normal_attack_left_04",
+	"frame": {"x":114,"y":184,"w":114,"h":93},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":114,"h":93},
+	"sourceSize": {"w":114,"h":93}
+},
+{
+	"filename": "pope_normal_attack_left_05",
+	"frame": {"x":0,"y":184,"w":114,"h":92},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":114,"h":92},
+	"sourceSize": {"w":114,"h":92}
+},
+{
+	"filename": "pope_normal_attack_left_06",
+	"frame": {"x":111,"y":371,"w":115,"h":95},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":115,"h":95},
+	"sourceSize": {"w":115,"h":95}
+},
+{
+	"filename": "pope_normal_attack_left_07",
+	"frame": {"x":0,"y":562,"w":121,"h":96},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":121,"h":96},
+	"sourceSize": {"w":121,"h":96}
+},
+{
+	"filename": "pope_normal_attack_left_08",
+	"frame": {"x":111,"y":466,"w":117,"h":96},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":117,"h":96},
+	"sourceSize": {"w":117,"h":96}
+},
+{
+	"filename": "pope_normal_idle_left_01",
+	"frame": {"x":0,"y":371,"w":111,"h":95},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":111,"h":95},
+	"sourceSize": {"w":111,"h":95}
+},
+{
+	"filename": "pope_normal_idle_left_02",
+	"frame": {"x":113,"y":0,"w":113,"h":92},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":113,"h":92},
+	"sourceSize": {"w":113,"h":92}
+},
+{
+	"filename": "pope_normal_idle_left_03",
+	"frame": {"x":0,"y":0,"w":113,"h":90},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":113,"h":90},
+	"sourceSize": {"w":113,"h":90}
+},
+{
+	"filename": "pope_normal_idle_left_04",
+	"frame": {"x":0,"y":277,"w":113,"h":93},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":113,"h":93},
+	"sourceSize": {"w":113,"h":93}
+},
+{
+	"filename": "pope_normal_idle_left_05",
+	"frame": {"x":0,"y":466,"w":111,"h":96},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":111,"h":96},
+	"sourceSize": {"w":111,"h":96}
+},
+{
+	"filename": "pope_normal_idle_left_06",
+	"frame": {"x":121,"y":562,"w":111,"h":96},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":111,"h":96},
+	"sourceSize": {"w":111,"h":96}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "pope_normal.png",
+	"format": "RGBA8888",
+	"size": {"w":232,"h":658},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:37984f454432dfc9804f6d946d8ede80:7da72233db8f7dcc4d874dda50748188:7b1a29275e27447d99604b9c92a7e45e$"
+}
+}
