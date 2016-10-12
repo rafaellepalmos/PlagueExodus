@@ -25,15 +25,6 @@ var playState = {
 		//Kill loading label and progressbar when it's done
 		this.loadingLabel.kill();
 		this.progressBar.kill();
-		//Set parallex backgrounds which is included sky, clouds, sea.
-		this.sky = game.add.tileSprite(0, 0, game.width, game.height, 'sky');
-		this.sky.fixedToCamera = true;
-		this.sky.tileScale.set(1.5);
-		this.clouds = game.add.tileSprite(0, 100, game.width, 236, 'cloud');
-		this.clouds.fixedToCamera = true;
-		this.sea = game.add.tileSprite(0, 250, game.width, 96, 'sea');
-		this.sea.fixedToCamera = true;
-		this.sea.tileScale.set(1.1);
 		//create map before create player
 		this.drawMap();
 		//Player must be place right here
@@ -53,11 +44,11 @@ var playState = {
 		//set player collide world bounds top, right, left only
 		this.player.body.collideWorldBounds = true;
 		game.physics.arcade.checkCollision.down = false;
-		
+
 		//add enemies
 		this.addEnemy();//add enemy to map
 		this.moveEnemy();//move the enemy back and forth
-		
+
 		//particles for blood explosion
 		this.emitter = game.add.emitter(0, 0, 15); //create emitter with x,y,# of particles
 		this.emitter.makeParticles('blood');// Set blood for the particles
@@ -86,17 +77,17 @@ var playState = {
 		game.physics.arcade.collide(this.player, this.layer);
 		game.physics.arcade.collide(this.enemies, this.layer);
 		game.physics.arcade.collide(this.enemy01, this.layer);
-		
+
 		//Call movePlayer function
 		this.movePlayer();
-		
+
 		//to keep the enemies moving
 		this.moveEnemy();
-		
+
 		//player collides with enemies
 		//game.physics.arcade.collide(this.player, this.enemy01);
 		game.physics.arcade.overlap(this.player, this.enemies, this.playerDie, null, this);
-		
+
 		//Set parallex backgrounds
 		this.clouds.tilePosition.set(this.clouds.x * -0.1, 0);
 		this.sea.tilePosition.set(this.sea.x * -0.15, 0);
@@ -175,62 +166,62 @@ var playState = {
 			this.player.body.velocity.y = -300;
 		}
 	},
-	
+
 	playerDie: function() {
 		this.playerRespawn();
 	},
-	
+
 	playerRespawn: function() {
 		this.player.reset(this.playerBirthPlaceX, this.playerBirthPlaceY); //reset player to original location
 		//this.player.reset(16, 1880);//reset player to original location
 		game.camera.flash(0xffffff, 300);//flash a camera upon respawn
 		this.player.animations.play('respawn');//play respawn animation
 	},
-	
+
 	addEnemy: function() {
 		this.enemies = game.add.group();
-		
+
 		switch (game.global.playLevel) {
 			default:
 			case 1:
-			
+
 			break;
 
 			case 2:
-			
+
 			//add enemy
 			this.enemy01 = game.add.sprite(800, 1880, 'enemy01', 'curupira_left01');
 			this.enemies.add(this.enemy01);//add to group
-			
+
 			//add animation from atlas
 			this.enemy01.animations.add('enemy01_left', ['curupira_left01', 'curupira_left02', 'curupira_left03', 'curupira_left04', 'curupira_left05', 'curupira_left06'], 8, true);
 			this.enemy01.animations.add('enemy01_right', ['curupira_right01', 'curupira_right02', 'curupira_right03', 'curupira_right04', 'curupira_right05', 'curupira_right06'], 8, true);
 			this.enemy01.animations.add('enemy01_deadleft', ['curupira_deadleft01', 'curupira_deadleft02'], 8, false);
 			this.enemy01.animations.add('enemy01_deadright', ['curupira_deadright01', 'curupira_deadright02'], 8, false);
-			
+
 			this.enemy01.anchor.setTo(0.5, 0.5);
 			game.physics.arcade.enable(this.enemy01);
 			this.enemy01.body.gravity.y = 700;
 			this.enemy01.body.collideWorldBounds = true;//make the enemy collide with the borders of the game
 			this.enemy01.body.immovable = true;//so the player can't push them
-			
+
 			break;
 
 			case 3:
 			break;
 		}
 	},
-	
+
 	moveEnemy: function(){
-		
+
 		switch (game.global.playLevel) {
 			default:
 			case 1:
-			
+
 			break;
 
 			case 2:
-			
+
 			if (this.enemy01.position.x  < 401) {
 				this.enemy01.animations.play('enemy01_right');
 				this.enemy01.body.velocity.x = 100;
@@ -239,7 +230,7 @@ var playState = {
 				this.enemy01.animations.play('enemy01_left');
 				this.enemy01.body.velocity.x = -100;
 			}
-			
+
 			break;
 
 			case 3:
@@ -280,10 +271,14 @@ var playState = {
 	},
 
 	drawMap: function () {
+
 		//Use global variable "playLevel" to select Level
 		switch (game.global.playLevel) {
 			default:
 			case 1:
+				this.sky = game.add.tileSprite(0, 0, game.width, game.height, 'sky');
+				this.clouds = game.add.tileSprite(0, 100, game.width, 236, 'cloud');
+				this.sea = game.add.tileSprite(0, 250, game.width, 96, 'sea');
 				this.map = game.add.tilemap('map-1');
 				this.map.addTilesetImage('tileset-1');
 				this.layer2 = this.map.createLayer('Tile Layer 2');
@@ -297,6 +292,9 @@ var playState = {
 				break;
 
 			case 2:
+				this.sky = game.add.tileSprite(0, 0, game.width, game.height, 'sky');
+				this.clouds = game.add.tileSprite(0, 100, game.width, 236, 'cloud');
+				this.sea = game.add.tileSprite(0, 250, game.width, 96, 'sea');
 				this.map = game.add.tilemap('map-2');
 				this.map.addTilesetImage('tileset-1');
 				this.layer2 = this.map.createLayer('Tile Layer 2');
@@ -310,6 +308,9 @@ var playState = {
 				break;
 
 			case 3:
+				this.sky = game.add.tileSprite(0, 0, game.width, game.height, 'sky');
+				this.clouds = game.add.tileSprite(0, 100, game.width, 236, 'cloud');
+				this.sea = game.add.tileSprite(0, 250, game.width, 96, 'sea');
 				this.map = game.add.tilemap('map-3');
 				this.map.addTilesetImage('tileset-1');
 				this.layer2 = this.map.createLayer('Tile Layer 2');
@@ -323,6 +324,9 @@ var playState = {
 				break;
 
 			case 4:
+				this.sky = game.add.tileSprite(0, 0, game.width, game.height, 'sky_dark');
+				this.clouds = game.add.tileSprite(0, 100, game.width, 236, 'cloud_dark');
+				this.sea = game.add.tileSprite(0, 250, game.width, 96, 'sea_dark');
 				this.map = game.add.tilemap('map-4');
 				this.map.addTilesetImage('tileset-1');
 				this.layer2 = this.map.createLayer('Tile Layer 2');
@@ -335,6 +339,12 @@ var playState = {
 				this.deadLine = 2100;
 				break;
 		}
+		//set up some bg image
+		this.sky.fixedToCamera = true;
+		this.sky.tileScale.set(1.5);
+		this.clouds.fixedToCamera = true;
+		this.sea.fixedToCamera = true;
+		this.sea.tileScale.set(1.1);
 		return;
 	},
 }
