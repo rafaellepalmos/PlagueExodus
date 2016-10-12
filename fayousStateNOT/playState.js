@@ -54,6 +54,11 @@ var playState = {
 		this.bossText.cameraOffset.setTo(175, 10);
 		game.global.bossHP = 5000;
 
+		//add story text at the start
+		this.storyText = game.add.text(0, 200, "Earth has drastically changed since the last time you were awake. You need to learn\nto adapt quickly or you might not survive. What? Why are you the only one uninfect-\ned? Oh, did I forget to tell you...\n                              You are the chosen one.\nHaha, no pressure, right? It is no big deal, it\'s just that out of however many bil-\nlion people you were the one gifted with immunity. I cannot explain why, or how, ju-\nst know that there are other humans still alive that are still fighting to survive.\nYou need to save them. How? Get to the next level. Press spacebar to begin!", { font: "10px Courier New", fill: "#ffffff"});
+		this.storyText.fixedToCamera = true;
+		this.storyText.cameraOffset.setTo(0, 200);
+
 		//add score
 		this.scoreText = game.add.text(325, 10, "Nonth\'s Brain: 0", { font: "18px Arial", fill: "#ffffff"});
 		this.scoreText.fixedToCamera = true;
@@ -123,7 +128,7 @@ var playState = {
 		game.physics.arcade.overlap(this.player, this.chests, this.chestOpening, null, this);
 
 		//player collides with portals
-		game.physics.arcade.overlap(this.player, this.portals, this.portalEntering, null, this);
+ -		game.physics.arcade.overlap(this.player, this.portals, this.portalEntering, null, this);
 
 		//Set parallex backgrounds
 		this.clouds.tilePosition.set(this.clouds.x * -0.1, 0);
@@ -281,6 +286,7 @@ var playState = {
 		//check if jump button is pressed
 		if ((this.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR) || this.jump) && this.player.body.onFloor()) {
 			this.player.body.velocity.y = -400;
+			this.storyText.text = "";
 		}
 	},
 
@@ -333,6 +339,11 @@ var playState = {
 		if (this.input.keyboard.isDown(Phaser.Keyboard.TWO) || this.interact) {
 			this.changeLevel(portal.gotoLevel);
 		}
+	},
+
+	changeLevel: function(level) {
+		game.global.playLevel = level;
+		game.state.start('play');
 	},
 
 	addEnemy: function() {
@@ -478,11 +489,6 @@ var playState = {
 		}
 	},
 
-	changeLevel: function(level) {
-		game.global.playLevel = level;
-		game.state.start('play');
-	},
-
 	render: function () {
 		game.debug.bodyInfo(this.player, 32, 32);
 	},
@@ -588,8 +594,6 @@ var playState = {
 				this.map.setCollisionBetween(1, 1159, true, this.layer);
 				this.playerBirthPlaceX = 16;
 				this.playerBirthPlaceY = 1880;
-//				this.playerBirthPlaceX = 7812;	//Latte uses these to test portal
-//				this.playerBirthPlaceY = 989;
 				this.deadLine = 2100;
 				//adding portal
 				this.portal01 = game.add.sprite(7825, 995, 'portal', 'portal_01');
@@ -613,8 +617,6 @@ var playState = {
 				this.map.setCollisionBetween(1, 1159, true, this.layer);
 				this.playerBirthPlaceX = 16;
 				this.playerBirthPlaceY = 1880;
-//				this.playerBirthPlaceX = 5514;	////Latte uses these to test portal
-//				this.playerBirthPlaceY = 1229;
 				this.deadLine = 2100;
 				//adding portal
 				this.portal01 = game.add.sprite(5535, 1235, 'portal', 'portal_01');
@@ -657,8 +659,6 @@ var playState = {
 				this.map.setCollisionBetween(1, 1159, true, this.layer);
 				this.playerBirthPlaceX = 1082.67;
 				this.playerBirthPlaceY = 1245;
-//				this.playerBirthPlaceX = 2914;
-//				this.playerBirthPlaceY = 3053;
 				this.deadLine = 150000;
 				this.bgMusic = game.add.audio('Level_5');
 				this.bgMusic.loop = true;
