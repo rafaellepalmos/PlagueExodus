@@ -8,11 +8,13 @@ var loadState = {
 		this.progressBar.anchor.setTo(0.5, 0.5);
 		game.load.setPreloadSprite(this.progressBar);
 		//all assets can be initialized here
-		
+
 		//player atlas
 		game.load.atlasJSONArray('player', 'assets/male_melee.png', 'assets/male_melee.json');
+
+		//enemy01 atlas
 		game.load.atlasJSONArray('health', 'assets/health.png', 'assets/health.json');
-		
+
 		//enemy atlas
 		game.load.atlasJSONArray('boss', 'assets/pope_normal.png', 'assets/pope_normal.json');
 		game.load.atlasJSONArray('lightning', 'assets/lightning.png', 'assets/lightning.json');
@@ -23,6 +25,9 @@ var loadState = {
 		game.load.image('cloud', 'assets/platforms/set-1/clouds.png');
 		game.load.image('sky', 'assets/platforms/set-1/sky.png');
 		game.load.image('sea', 'assets/platforms/set-1/sea.png');
+		game.load.image('cloud_dark', 'assets/platforms/set-1/clouds_dark.png');
+		game.load.image('sky_dark', 'assets/platforms/set-1/sky_dark.png');
+		game.load.image('sea_dark', 'assets/platforms/set-1/sea_dark.png');
 		game.load.image('enemy', 'assets/enemy.png');
 
 		//// Audio
