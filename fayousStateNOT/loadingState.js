@@ -23,6 +23,9 @@ var loadState = {
 		game.load.atlasJSONArray('banshee', 'assets/banshee.png', 'assets/banshee.json');
 		game.load.image('blood', 'assets/blood.png');
 
+		//chest atlas
+		game.load.atlasJSONArray('purple_chest', 'assets/purple_chest.png', 'assets/purple_chest.json');
+
 		//asset for play state
 		game.load.image('cloud', 'assets/platforms/set-1/clouds.png');
 		game.load.image('sky', 'assets/platforms/set-1/sky.png');
