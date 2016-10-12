@@ -25,13 +25,12 @@ var menuState = {
 		this.bgMusic.loop = true;
 		this.bgMusic.play();
 
-
 	},
 
 	start: function () {
 		this.bgMusic.stop();
-		game.state.start('play');
-//		game.state.start('gameover'); //test gameover state
+//		game.state.start('play');
+		game.state.start('gameover'); //test gameover state
 	},
 
 	update: function() {

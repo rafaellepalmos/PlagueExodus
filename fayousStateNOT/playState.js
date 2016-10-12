@@ -91,6 +91,11 @@ var playState = {
 		this.bossAttack = game.time.now;//intervals between boss attacks
 		this.playerAttack = game.time.now;//intervals between player attacks
 
+		//audio effect
+		this.hit_1_Sound = game.add.audio('hit_1');
+		this.lightningSound = game.add.audio('lightning');
+		this.treasureSound = game.add.audio('treasure_opening');
+
 		if (!game.device.desktop) {
 			// Create an empty label to write the error message if needed
 			this.rotateLabel = game.add.text(game.width/2, game.height/2, '',
@@ -157,6 +162,7 @@ var playState = {
 		if (this.input.keyboard.isDown(Phaser.Keyboard.ONE) || this.attack) {
 			game.global.lastkey = 'ONE';
 			console.log("attacking"); //to debug
+			this.hit_1_Sound.play();
 			//check if player is facing left
 			if (game.global.lastdir == 'left') {
 				this.player.animations.play('attackleft'); //attack facing left
@@ -353,6 +359,7 @@ var playState = {
 		if (this.input.keyboard.isDown(Phaser.Keyboard.TWO) || this.interact) {
 			if(chest.isOpened == false) {
 				chest.animations.play('open');
+				this.treasureSound.play();
 				chest.isOpened = true;
 			}
 		}
@@ -501,7 +508,8 @@ var playState = {
 					this.lightning.reset(this.player.position.x-10, this.player.position.y-90)//spawn lightning at the player position
 					this.lightning.animations.play('lightning');//play lightning animation
 					this.heartReduce();//hurt the player
-					}, this);
+					this.lightningSound.play();
+				}, this);
 
 				//when animation is done, do this:
 				this.lightning.animations.currentAnim.onComplete.add(function () {
@@ -616,10 +624,10 @@ var playState = {
 				this.layer.resizeWorld();
 				this.layer3 = this.map.createLayer('Tile Layer 3');
 				this.map.setCollisionBetween(1, 1159, true, this.layer);
-//				this.playerBirthPlaceX = 16;
-//				this.playerBirthPlaceY = 1880;
-				this.playerBirthPlaceX = 959; // Latte tests the chest at the end of the map
-				this.playerBirthPlaceY = 1741;
+				this.playerBirthPlaceX = 16;
+				this.playerBirthPlaceY = 1880;
+//				this.playerBirthPlaceX = 959; // Latte tests the chest at the end of the map
+//				this.playerBirthPlaceY = 1741;
 				this.deadLine = 2100;
 				//adding chests
 				this.chest01 = game.add.sprite(976, 1790, 'purple_chest', 'purple_chest_01');
