@@ -22,6 +22,7 @@ var playState = {
 		//Player must be place right here
 		//this.player = game.add.sprite(16, 1880, 'player', 'male_melee_right01');//change to atlas
 		this.player = game.add.sprite(this.playerBirthPlaceX, this.playerBirthPlaceY, 'player', 'male_melee_right01'); //change to atlas
+		this.playerImmortal = false;
 		//add animation from atlas
 		this.player.animations.add('left', ['male_melee_left01', 'male_melee_left02', 'male_melee_left03', 'male_melee_left04', 'male_melee_left05','male_melee_left06', 'male_melee_left07', 'male_melee_left08', 'male_melee_left09'], 8, true);
 		this.player.animations.add('right', ['male_melee_right01', 'male_melee_right02', 'male_melee_right03', 'male_melee_right04', 'male_melee_right05', 'male_melee_right06', 'male_melee_right07', 'male_melee_right08', 'male_melee_right09'], 8, true);
@@ -127,7 +128,7 @@ var playState = {
 		this.moveEnemy();
 
 		//player collides with enemies
-		game.physics.arcade.overlap(this.player, this.enemies, this.playerDie, null, this);
+		game.physics.arcade.overlap(this.player, this.enemies, this.playerDamaged, null, this);
 
 		//player collides with portals
 		game.physics.arcade.overlap(this.player, this.portals, this.portalEntering, null, this);
@@ -142,7 +143,7 @@ var playState = {
 		if (!this.player.inWorld || this.player.y > this.deadLine) {
 			console.log("player fell out of bounds");
 			game.global.playerhp = 0;
-			this.playerRespawn();
+			this.playerDie();
 			game.global.lastkey = 'dead';
 		}
 
@@ -331,17 +332,39 @@ var playState = {
 		}
 	},
 
+	playerDamaged: function() {
+		if(this.playerImmortal == false) {
+			this.blinkTimmer = game.time.events.loop(Phaser.Timer.SECOND/5, this.playerBlink, this);
+			game.time.events.add(Phaser.Timer.SECOND*3, this.playerStopBlink, this);
+			this.playerImmortal = true;
+			game.global.playerhp -= 1;
+			if (game.global.playerhp > 0){
+				console.log("Health: " + game.global.playerhp);
+				this.health.frameName = 'health' + game.global.playerhp;
+			}
+			else {
+				this.playerDie();
+			}
+		}
+	},
+
+	playerBlink: function(option) {
+		if(this.player.alpha == 1) {
+			this.player.alpha = 0.5;
+		} else {
+			this.player.alpha = 1;
+		}
+	},
+
+	playerStopBlink: function(option) {
+		game.time.events.remove(this.blinkTimmer);
+		this.playerImmortal = false;
+		this.player.alpha = 1;
+	},
+
 	playerDie: function() {
-		this.playerRespawn();
-		game.global.playerhp -= 1;
-		if (game.global.playerhp > 0){
-			console.log("Health: " + game.global.playerhp);
-			this.health.frameName = 'health' + game.global.playerhp;
-		}
-		else {
-			game.global.playerhp =10;
-			this.health.frameName = 'health10';
-		}
+		game.state.start('gameover');
+//		this.playerRespawn();
 	},
 
 	playerRespawn: function() {
@@ -408,12 +431,14 @@ var playState = {
 			this.enemy02.body.gravity.y = 700;
 			this.enemy02.body.collideWorldBounds = true;//make the enemy collide with the borders of the game
 			this.enemy02.body.immovable = true;//so the player can't push them
+			this.enemy02.scale.setTo(0.7, 0.7);
 
 			//add boss
-			this.boss = game.add.sprite(6620, 1479, 'boss', 'pope_normal_idle_left_01');
+			this.boss = game.add.sprite(6620, 1491, 'boss', 'pope_normal_idle_left_01');
 			this.boss.anchor.setTo(0.5, 0.5);
 			game.physics.arcade.enable(this.boss);
 			this.boss.body.immovable = true;//so the player can't push them
+			this.boss.scale.setTo(0.7, 0.7);
 
 			//add boss animation
 			this.boss.animations.add('atk', ['pope_normal_attack_left_01', 'pope_normal_attack_left_02', 'pope_normal_attack_left_03', 'pope_normal_attack_left_04', 'pope_normal_attack_left_05', 'pope_normal_attack_left_06', 'pope_normal_attack_left_07', 'pope_normal_attack_left_08'], 8, false);
@@ -626,8 +651,8 @@ var playState = {
 				this.map.setCollisionBetween(1, 1159, true, this.layer);
 				this.playerBirthPlaceX = 16;
 				this.playerBirthPlaceY = 1880;
-//				this.playerBirthPlaceX = 959; // Latte tests the chest at the end of the map
-//				this.playerBirthPlaceY = 1741;
+//				this.playerBirthPlaceX = 6479; // Latte tests the chest at the end of the map
+//				this.playerBirthPlaceY = 1469;
 				this.deadLine = 2100;
 				//adding chests
 				this.chest01 = game.add.sprite(976, 1790, 'purple_chest', 'purple_chest_01');
