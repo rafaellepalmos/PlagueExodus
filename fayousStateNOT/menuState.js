@@ -18,6 +18,11 @@ var menuState = {
 		//for testing, use up key to enter game state
 		var upKey = game.input.keyboard.addKey(Phaser.Keyboard.UP);
 		upKey.onDown.add(this.start, this);
+		
+		//for mobile
+		if (!game.device.desktop) {
+			game.input.onDown.add(this.start, this);
+		}
 
 		this.bgMusic = game.add.audio('Menu_Theme');
 		this.bgMusic.loop = true;
