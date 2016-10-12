@@ -1,0 +1,124 @@
+{"frames": [
+
+{
+	"filename": "Fallen_Bishop_left_01",
+	"frame": {"x":0,"y":0,"w":78,"h":117},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":78,"h":117},
+	"sourceSize": {"w":78,"h":117}
+},
+{
+	"filename": "Fallen_Bishop_left_02",
+	"frame": {"x":78,"y":0,"w":79,"h":119},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":79,"h":119},
+	"sourceSize": {"w":79,"h":119}
+},
+{
+	"filename": "Fallen_Bishop_left_03",
+	"frame": {"x":157,"y":0,"w":83,"h":117},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":83,"h":117},
+	"sourceSize": {"w":83,"h":117}
+},
+{
+	"filename": "Fallen_Bishop_left_04",
+	"frame": {"x":240,"y":0,"w":91,"h":112},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":91,"h":112},
+	"sourceSize": {"w":91,"h":112}
+},
+{
+	"filename": "Fallen_Bishop_left_05",
+	"frame": {"x":331,"y":0,"w":92,"h":110},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":92,"h":110},
+	"sourceSize": {"w":92,"h":110}
+},
+{
+	"filename": "Fallen_Bishop_left_06",
+	"frame": {"x":423,"y":0,"w":82,"h":114},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":82,"h":114},
+	"sourceSize": {"w":82,"h":114}
+},
+{
+	"filename": "Fallen_Bishop_left_07",
+	"frame": {"x":505,"y":0,"w":74,"h":112},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":74,"h":112},
+	"sourceSize": {"w":74,"h":112}
+},
+{
+	"filename": "Fallen_Bishop_right_01",
+	"frame": {"x":579,"y":0,"w":78,"h":117},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":78,"h":117},
+	"sourceSize": {"w":78,"h":117}
+},
+{
+	"filename": "Fallen_Bishop_right_02",
+	"frame": {"x":657,"y":0,"w":79,"h":119},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":79,"h":119},
+	"sourceSize": {"w":79,"h":119}
+},
+{
+	"filename": "Fallen_Bishop_right_03",
+	"frame": {"x":736,"y":0,"w":83,"h":117},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":83,"h":117},
+	"sourceSize": {"w":83,"h":117}
+},
+{
+	"filename": "Fallen_Bishop_right_04",
+	"frame": {"x":819,"y":0,"w":91,"h":112},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":91,"h":112},
+	"sourceSize": {"w":91,"h":112}
+},
+{
+	"filename": "Fallen_Bishop_right_05",
+	"frame": {"x":910,"y":0,"w":92,"h":110},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":92,"h":110},
+	"sourceSize": {"w":92,"h":110}
+},
+{
+	"filename": "Fallen_Bishop_right_06",
+	"frame": {"x":1002,"y":0,"w":82,"h":114},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":82,"h":114},
+	"sourceSize": {"w":82,"h":114}
+},
+{
+	"filename": "Fallen_Bishop_right_07",
+	"frame": {"x":1084,"y":0,"w":74,"h":112},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":74,"h":112},
+	"sourceSize": {"w":74,"h":112}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "fallen_bishop.png",
+	"format": "RGBA8888",
+	"size": {"w":1158,"h":119},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:ecc171b272ff51bf69953f57f5783777:1cfde393977a0a559c8d58a35ffe37c3:06669a3ed1c025ebcf61e9333e9afb6d$"
+}
+}

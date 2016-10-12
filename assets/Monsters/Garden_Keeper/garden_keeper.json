@@ -1,0 +1,92 @@
+{"frames": [
+
+{
+	"filename": "Garden_Keeper_left_01",
+	"frame": {"x":0,"y":0,"w":36,"h":53},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":36,"h":53},
+	"sourceSize": {"w":36,"h":53}
+},
+{
+	"filename": "Garden_Keeper_left_02",
+	"frame": {"x":36,"y":0,"w":42,"h":51},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":42,"h":51},
+	"sourceSize": {"w":42,"h":51}
+},
+{
+	"filename": "Garden_Keeper_left_03",
+	"frame": {"x":78,"y":0,"w":33,"h":54},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":33,"h":54},
+	"sourceSize": {"w":33,"h":54}
+},
+{
+	"filename": "Garden_Keeper_left_04",
+	"frame": {"x":111,"y":0,"w":42,"h":51},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":42,"h":51},
+	"sourceSize": {"w":42,"h":51}
+},
+{
+	"filename": "Garden_Keeper_left_05",
+	"frame": {"x":153,"y":0,"w":33,"h":54},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":33,"h":54},
+	"sourceSize": {"w":33,"h":54}
+},
+{
+	"filename": "Garden_Keeper_right_01",
+	"frame": {"x":186,"y":0,"w":36,"h":53},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":36,"h":53},
+	"sourceSize": {"w":36,"h":53}
+},
+{
+	"filename": "Garden_Keeper_right_02",
+	"frame": {"x":222,"y":0,"w":42,"h":51},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":42,"h":51},
+	"sourceSize": {"w":42,"h":51}
+},
+{
+	"filename": "Garden_Keeper_right_03",
+	"frame": {"x":264,"y":0,"w":33,"h":54},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":33,"h":54},
+	"sourceSize": {"w":33,"h":54}
+},
+{
+	"filename": "Garden_Keeper_right_04",
+	"frame": {"x":297,"y":0,"w":42,"h":51},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":42,"h":51},
+	"sourceSize": {"w":42,"h":51}
+},
+{
+	"filename": "Garden_Keeper_right_05",
+	"frame": {"x":339,"y":0,"w":33,"h":54},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":33,"h":54},
+	"sourceSize": {"w":33,"h":54}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "garden_keeper.png",
+	"format": "RGBA8888",
+	"size": {"w":372,"h":54},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:43df03b7c47610fb4a62def61834e136:0eff3d59ebd39bb950e4d161895a06a1:7873c3a52e864c9736762ba9e6876754$"
+}
+}

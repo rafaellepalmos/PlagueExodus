@@ -39,11 +39,18 @@ var playState = {
 
 		this.player.anchor.setTo(0.5, 0.5);
 		game.physics.arcade.enable(this.player);
-		this.player.body.gravity.y = 700;
+		this.player.body.gravity.y = 700; //used to be 700
 
 		//set player collide world bounds top, right, left only
 		this.player.body.collideWorldBounds = true;
 		game.physics.arcade.checkCollision.down = false;
+
+		//add player health
+		this.health = game.add.sprite(10, 1670, 'health', 'health10');//add health sprite
+		this.health.anchor.setTo(0, 0);//set anchor to top right
+		this.health.fixedToCamera = true;//fix it to camera
+		this.health.cameraOffset.setTo(10, 10);//set the location of health in relation to the camera
+		game.global.playerhp = 10;
 
 		//add enemies
 		this.addEnemy();//add enemy to map
@@ -76,8 +83,13 @@ var playState = {
 		//Set player collides with layer 1 of tilemap
 		game.physics.arcade.collide(this.player, this.layer);
 		game.physics.arcade.collide(this.enemies, this.layer);
+<<<<<<< HEAD
 		game.physics.arcade.collide(this.enemy01, this.layer);
 
+=======
+		//game.physics.arcade.collide(this.enemy01, this.layer);
+
+>>>>>>> 025ae175b93f5e6c465c138007c95b989d0c3262
 		//Call movePlayer function
 		this.movePlayer();
 
@@ -94,6 +106,7 @@ var playState = {
 
 		if (!this.player.inWorld || this.player.y > this.deadLine) {
 			console.log("player fell out of bounds");
+			game.global.playerhp = 0;
 			this.playerRespawn();
 			game.global.lastkey = 'dead';
 		}
@@ -113,18 +126,29 @@ var playState = {
 			}
 			//check if player is facing right
 			else if (game.global.lastdir == 'right') {
-				var d = this.enemy01.position.x - this.player.position.x;
-				if (d < 100) {
-					game.time.events.add(Phaser.Timer.SECOND * .25, function(){
-						this.enemy01.kill();
-						// Set the position of the emitter
-						this.emitter.x = this.enemy01.x;
-						this.emitter.y = this.enemy01.y;
-						this.emitter.start(true, 800, null, 15);// Start the emitter by exploding 15 particles that will live 800ms
-					}, this);
+				switch (game.global.playLevel) {
+					default:
+					case 1:
+					break;
+
+					case 2:
+						var d = this.enemy01.position.x - this.player.position.x;
+						if (d < 100) {
+							game.time.events.add(Phaser.Timer.SECOND * .25, function(){
+								this.enemy01.kill();
+								// Set the position of the emitter
+								this.emitter.x = this.enemy01.x;
+								this.emitter.y = this.enemy01.y;
+								this.emitter.start(true, 800, null, 15);// Start the emitter by exploding 15 particles that will live 800ms
+							}, this);
+						}
+						this.player.animations.play('attackright');//attack facing right
+						this.player.animations.currentAnim.onComplete.add(function () {game.global.lastkey = 'RIGHT';}, this);//idle right after animation finishes
+						break;
+
+					case 3:
+					break;
 				}
-				this.player.animations.play('attackright');//attack facing right
-				this.player.animations.currentAnim.onComplete.add(function () {game.global.lastkey = 'RIGHT';}, this);//idle right after animation finishes
 			}
 			//default: do nothing
 			else {
@@ -163,12 +187,21 @@ var playState = {
 		}
 		//check if jump button is pressed
 		if (this.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR) && this.player.body.onFloor()) {
-			this.player.body.velocity.y = -300;
+			this.player.body.velocity.y = -400;
 		}
 	},
 
 	playerDie: function() {
 		this.playerRespawn();
+		game.global.playerhp -= 1;
+		if (game.global.playerhp > 0){
+			console.log("Health: " + game.global.playerhp);
+			this.health.frameName = 'health' + game.global.playerhp;
+		}
+		else {
+			game.global.playerhp =10;
+			this.health.frameName = 'health10';
+		}
 	},
 
 	playerRespawn: function() {
@@ -176,6 +209,10 @@ var playState = {
 		//this.player.reset(16, 1880);//reset player to original location
 		game.camera.flash(0xffffff, 300);//flash a camera upon respawn
 		this.player.animations.play('respawn');//play respawn animation
+		if (game.global.playerhp == 0) {
+			game.global.playerhp =10;
+			this.health.frameName = 'health10';
+		}
 	},
 
 	addEnemy: function() {
@@ -266,6 +303,16 @@ var playState = {
 				game.load.image('tileset-1', 'assets/platforms/set-1/tileset-1.png');
 				game.load.tilemap('map-4', 'assets/platforms/set-1/map-4Puzzle.json', null, Phaser.Tilemap.TILED_JSON);
 				break;
+
+			case 5:
+				game.load.image('tileset-1', 'assets/platforms/set-1/tileset-1.png');
+				game.load.tilemap('map-5', 'assets/platforms/set-1/map-4aPuzzle.json', null, Phaser.Tilemap.TILED_JSON);
+				break;
+
+			case 6:
+				game.load.image('tileset-1', 'assets/platforms/set-1/tileset-1.png');
+				game.load.tilemap('map-6', 'assets/platforms/set-1/map-4bPuzzle.json', null, Phaser.Tilemap.TILED_JSON);
+				break;
 		}
 		return;
 	},
@@ -336,7 +383,32 @@ var playState = {
 				this.map.setCollisionBetween(1, 1159, true, this.layer);
 				this.playerBirthPlaceX = 1740;
 				this.playerBirthPlaceY = 7965;
-				this.deadLine = 2100;
+				this.deadLine = 15000;
+				break;
+
+			case 5:
+				this.map = game.add.tilemap('map-5');
+				this.map.addTilesetImage('tileset-1');
+				this.layer2 = this.map.createLayer('Tile Layer 2');
+				this.layer = this.map.createLayer('Tile Layer 1');
+				this.layer.resizeWorld();
+				this.layer3 = this.map.createLayer('Tile Layer 3');
+				this.map.setCollisionBetween(1, 1159, true, this.layer);
+				this.playerBirthPlaceX = 1082.67;
+				this.playerBirthPlaceY = 1245;
+				this.deadLine = 150000;
+				break;
+			case 6:
+				this.map = game.add.tilemap('map-6');
+				this.map.addTilesetImage('tileset-1');
+				this.layer2 = this.map.createLayer('Tile Layer 2');
+				this.layer = this.map.createLayer('Tile Layer 1');
+				this.layer.resizeWorld();
+				this.layer3 = this.map.createLayer('Tile Layer 3');
+				this.map.setCollisionBetween(1, 1159, true, this.layer);
+				this.playerBirthPlaceX = 2704;
+				this.playerBirthPlaceY = 1533;
+				this.deadLine = 15000;
 				break;
 		}
 		//set up some bg image

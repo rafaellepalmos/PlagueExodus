@@ -1,0 +1,100 @@
+{"frames": [
+
+{
+	"filename": "health0",
+	"frame": {"x":0,"y":0,"w":115,"h":20},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":115,"h":20},
+	"sourceSize": {"w":115,"h":20}
+},
+{
+	"filename": "health1",
+	"frame": {"x":0,"y":20,"w":115,"h":20},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":115,"h":20},
+	"sourceSize": {"w":115,"h":20}
+},
+{
+	"filename": "health2",
+	"frame": {"x":0,"y":40,"w":115,"h":20},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":115,"h":20},
+	"sourceSize": {"w":115,"h":20}
+},
+{
+	"filename": "health3",
+	"frame": {"x":0,"y":60,"w":115,"h":20},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":115,"h":20},
+	"sourceSize": {"w":115,"h":20}
+},
+{
+	"filename": "health4",
+	"frame": {"x":0,"y":80,"w":115,"h":20},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":115,"h":20},
+	"sourceSize": {"w":115,"h":20}
+},
+{
+	"filename": "health5",
+	"frame": {"x":0,"y":100,"w":115,"h":20},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":115,"h":20},
+	"sourceSize": {"w":115,"h":20}
+},
+{
+	"filename": "health6",
+	"frame": {"x":0,"y":120,"w":115,"h":20},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":115,"h":20},
+	"sourceSize": {"w":115,"h":20}
+},
+{
+	"filename": "health7",
+	"frame": {"x":0,"y":140,"w":115,"h":20},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":115,"h":20},
+	"sourceSize": {"w":115,"h":20}
+},
+{
+	"filename": "health8",
+	"frame": {"x":0,"y":160,"w":115,"h":20},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":115,"h":20},
+	"sourceSize": {"w":115,"h":20}
+},
+{
+	"filename": "health9",
+	"frame": {"x":0,"y":180,"w":115,"h":20},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":115,"h":20},
+	"sourceSize": {"w":115,"h":20}
+},
+{
+	"filename": "health10",
+	"frame": {"x":0,"y":200,"w":115,"h":20},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":115,"h":20},
+	"sourceSize": {"w":115,"h":20}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "health.png",
+	"format": "RGBA8888",
+	"size": {"w":115,"h":220},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:75ed087e89bb4c539ff7505c039ccd0f:3ec628ffac8d03bea9a31575eb2390c3:4ab86db837ea5a7156439e8a327f2d27$"
+}
+}

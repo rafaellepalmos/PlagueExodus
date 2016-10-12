@@ -1,0 +1,44 @@
+{"frames": [
+
+{
+	"filename": "lightning_01",
+	"frame": {"x":0,"y":0,"w":71,"h":232},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":71,"h":232},
+	"sourceSize": {"w":71,"h":232}
+},
+{
+	"filename": "lightning_02",
+	"frame": {"x":71,"y":0,"w":73,"h":235},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":73,"h":235},
+	"sourceSize": {"w":73,"h":235}
+},
+{
+	"filename": "lightning_03",
+	"frame": {"x":144,"y":0,"w":99,"h":230},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":99,"h":230},
+	"sourceSize": {"w":99,"h":230}
+},
+{
+	"filename": "lightning_04",
+	"frame": {"x":243,"y":0,"w":100,"h":232},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":100,"h":232},
+	"sourceSize": {"w":100,"h":232}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "lightning.png",
+	"format": "RGBA8888",
+	"size": {"w":343,"h":235},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:52f24812f8502db5f666eaea9cf0f22f:708bcbe1764b7f816c2d01fa8702d1ba:25be3648ac3d733248850a03c6feeca1$"
+}
+}

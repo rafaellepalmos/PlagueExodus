@@ -1,0 +1,76 @@
+{"frames": [
+
+{
+	"filename": "Baphomet_left_01",
+	"frame": {"x":88,"y":220,"w":88,"h":119},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":88,"h":119},
+	"sourceSize": {"w":88,"h":119}
+},
+{
+	"filename": "Baphomet_left_02",
+	"frame": {"x":88,"y":110,"w":96,"h":110},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":96,"h":110},
+	"sourceSize": {"w":96,"h":110}
+},
+{
+	"filename": "Baphomet_left_03",
+	"frame": {"x":96,"y":0,"w":88,"h":110},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":88,"h":110},
+	"sourceSize": {"w":88,"h":110}
+},
+{
+	"filename": "Baphomet_left_04",
+	"frame": {"x":0,"y":339,"w":83,"h":121},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":83,"h":121},
+	"sourceSize": {"w":83,"h":121}
+},
+{
+	"filename": "Baphomet_right_01",
+	"frame": {"x":0,"y":220,"w":88,"h":119},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":88,"h":119},
+	"sourceSize": {"w":88,"h":119}
+},
+{
+	"filename": "Baphomet_right_02",
+	"frame": {"x":0,"y":0,"w":96,"h":110},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":96,"h":110},
+	"sourceSize": {"w":96,"h":110}
+},
+{
+	"filename": "Baphomet_right_03",
+	"frame": {"x":0,"y":110,"w":88,"h":110},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":88,"h":110},
+	"sourceSize": {"w":88,"h":110}
+},
+{
+	"filename": "Baphomet_right_04",
+	"frame": {"x":83,"y":339,"w":83,"h":121},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":83,"h":121},
+	"sourceSize": {"w":83,"h":121}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "baphomet.png",
+	"format": "RGBA8888",
+	"size": {"w":184,"h":460},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:5140450b3e6d420d07e557ee20c9939c:c7fd84ec2c09388f6d5a1aa552ed896f:cbfd500f11dec76f26397f105f2e4ea5$"
+}
+}

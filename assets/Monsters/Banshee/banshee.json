@@ -1,0 +1,108 @@
+{"frames": [
+
+{
+	"filename": "banshee_left_01",
+	"frame": {"x":0,"y":0,"w":87,"h":128},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":87,"h":128},
+	"sourceSize": {"w":87,"h":128}
+},
+{
+	"filename": "banshee_left_02",
+	"frame": {"x":87,"y":0,"w":88,"h":128},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":88,"h":128},
+	"sourceSize": {"w":88,"h":128}
+},
+{
+	"filename": "banshee_left_03",
+	"frame": {"x":175,"y":0,"w":91,"h":128},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":91,"h":128},
+	"sourceSize": {"w":91,"h":128}
+},
+{
+	"filename": "banshee_left_04",
+	"frame": {"x":266,"y":0,"w":91,"h":128},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":91,"h":128},
+	"sourceSize": {"w":91,"h":128}
+},
+{
+	"filename": "banshee_left_05",
+	"frame": {"x":357,"y":0,"w":84,"h":124},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":84,"h":124},
+	"sourceSize": {"w":84,"h":124}
+},
+{
+	"filename": "banshee_left_06",
+	"frame": {"x":441,"y":0,"w":88,"h":126},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":88,"h":126},
+	"sourceSize": {"w":88,"h":126}
+},
+{
+	"filename": "banshee_right_01",
+	"frame": {"x":529,"y":0,"w":87,"h":128},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":87,"h":128},
+	"sourceSize": {"w":87,"h":128}
+},
+{
+	"filename": "banshee_right_02",
+	"frame": {"x":616,"y":0,"w":88,"h":128},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":88,"h":128},
+	"sourceSize": {"w":88,"h":128}
+},
+{
+	"filename": "banshee_right_03",
+	"frame": {"x":704,"y":0,"w":91,"h":128},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":91,"h":128},
+	"sourceSize": {"w":91,"h":128}
+},
+{
+	"filename": "banshee_right_04",
+	"frame": {"x":795,"y":0,"w":91,"h":128},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":91,"h":128},
+	"sourceSize": {"w":91,"h":128}
+},
+{
+	"filename": "banshee_right_05",
+	"frame": {"x":886,"y":0,"w":84,"h":124},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":84,"h":124},
+	"sourceSize": {"w":84,"h":124}
+},
+{
+	"filename": "banshee_right_06",
+	"frame": {"x":970,"y":0,"w":88,"h":126},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":88,"h":126},
+	"sourceSize": {"w":88,"h":126}
+}],
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "banshee.png",
+	"format": "RGBA8888",
+	"size": {"w":1058,"h":128},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:600e0b32d475eb44ec0d17ea683b28a3:a4653fe080dd01ec0e91137bcb537aff:98ac80fb65259defd0951501e8cfcebc$"
+}
+}
