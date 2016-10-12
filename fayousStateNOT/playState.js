@@ -85,7 +85,7 @@ var playState = {
 		//attack timers
 		this.bossAttack = game.time.now;//intervals between boss attacks
 		this.playerAttack = game.time.now;//intervals between player attacks
-		
+
 		if (!game.device.desktop) {
 			// Create an empty label to write the error message if needed
 			this.rotateLabel = game.add.text(game.width/2, game.height/2, '',
@@ -95,7 +95,7 @@ var playState = {
 			game.scale.onOrientationChange.add(this.orientationChange, this);
 			// Call the function at least once
 			this.orientationChange();
-			
+
 			//add mobile buttons
 			this.addMobileInputs();
 		}
@@ -106,7 +106,7 @@ var playState = {
 		game.physics.arcade.collide(this.player, this.layer);
 		game.physics.arcade.collide(this.player, this.boss);
 		game.physics.arcade.collide(this.enemies, this.layer);
-		
+
 		//check for boss distance
 		game.global.bossdist = this.boss.position.x - this.player.position.x;
 
@@ -119,6 +119,9 @@ var playState = {
 		//player collides with enemies
 		game.physics.arcade.overlap(this.player, this.enemies, this.playerDie, null, this);
 
+		//player collides with chest
+		game.physics.arcade.overlap(this.player, this.chest, this.chestOpening, null, this);
+
 		//Set parallex backgrounds
 		this.clouds.tilePosition.set(this.clouds.x * -0.1, 0);
 		this.sea.tilePosition.set(this.sea.x * -0.15, 0);
@@ -129,6 +132,7 @@ var playState = {
 			this.playerRespawn();
 			game.global.lastkey = 'dead';
 		}
+
 	},
 
 	movePlayer: function () {
@@ -140,7 +144,7 @@ var playState = {
 			this.attack = false;
 			this.interact = false;
 		}
-		
+
 		//if player is clicking attack key
 		if (this.input.keyboard.isDown(Phaser.Keyboard.ONE) || this.attack) {
 			game.global.lastkey = 'ONE';
@@ -229,7 +233,7 @@ var playState = {
 					case 3:
 					break;
 				}
-				
+
 				this.playerAttack = game.time.now + 1000;//next attack will be in 1 second
 			}
 			//default: do nothing
@@ -313,13 +317,23 @@ var playState = {
 		}
 	},
 
+	chestOpening: function(player, chest) {
+		if (this.input.keyboard.isDown(Phaser.Keyboard.TWO) || this.interact) {
+			if(this.chestOpened == false) {
+				this.chest.animations.play('open');
+				this.chestOpened = true;
+			}
+		}
+		this.chestOpeningEnable = true;
+	},
+
 	addEnemy: function() {
 		this.enemies = game.add.group();
 
 		switch (game.global.playLevel) {
 			default:
 			case 1:
-			
+
 			//add enemy01
 			this.enemy01 = game.add.sprite(800, 1741, 'woodie', 'Woodie_left_01');
 			this.enemies.add(this.enemy01);//add to group
@@ -332,7 +346,7 @@ var playState = {
 			this.enemy01.body.gravity.y = 700;
 			this.enemy01.body.collideWorldBounds = true;//make the enemy collide with the borders of the game
 			this.enemy01.body.immovable = true;//so the player can't push them
-			
+
 			//add enemy02
 			this.enemy02 = game.add.sprite(1200, 1741, 'banshee', 'banshee_left_01');
 			this.enemies.add(this.enemy02);//add to group
@@ -345,7 +359,7 @@ var playState = {
 			this.enemy02.body.gravity.y = 700;
 			this.enemy02.body.collideWorldBounds = true;//make the enemy collide with the borders of the game
 			this.enemy02.body.immovable = true;//so the player can't push them
-			
+
 			//add boss
 			this.boss = game.add.sprite(2300, 1559, 'boss', 'pope_normal_idle_left_01');
 			this.boss.anchor.setTo(0.5, 0.5);
@@ -403,7 +417,7 @@ var playState = {
 				this.enemy01.animations.play('enemy01_left');
 				this.enemy01.body.velocity.x = -100;
 			}
-			
+
 			//move enemy02
 			if (this.enemy02.position.x  < 1201) {
 				this.enemy02.animations.play('enemy02_right');
@@ -516,7 +530,14 @@ var playState = {
 				this.map.setCollisionBetween(1, 1159, true, this.layer);
 				this.playerBirthPlaceX = 16;
 				this.playerBirthPlaceY = 1880;
+//				this.playerBirthPlaceX = 7156; // Latte tests the chest at the end of the map
+//				this.playerBirthPlaceY = 1469;
 				this.deadLine = 2100;
+				this.chest = game.add.sprite(7156, 1520, 'purple_chest', 'purple_chest_01');
+				this.chest.animations.add('open', ['purple_chest_02', 'purple_chest_03', 'purple_chest_04'], 8, false);
+				this.chest.anchor.setTo(0.5, 1);
+				this.chestOpened = false;
+				game.physics.arcade.enable(this.chest);
 				break;
 
 			case 2:
@@ -600,7 +621,7 @@ var playState = {
 		this.sea.tileScale.set(1.1);
 		return;
 	},
-	
+
 	orientationChange: function() {
 		// If the game is in portrait (wrong orientation)
 		if (game.scale.isPortrait) {
@@ -617,7 +638,7 @@ var playState = {
 			this.rotateLabel.text = '';
 		}
 	},
-	
+
 	addMobileInputs: function() {
 		// Movement variables
 		this.moveLeft = false;
@@ -625,8 +646,8 @@ var playState = {
 		this.jump = false;
 		this.attack = false;
 		this.interact = false;
-		
-		// Add the jump button		
+
+		// Add the jump button
 		this.jumpButton = game.add.sprite(370, 1900, 'upButton');
 		this.jumpButton.anchor.setTo(0.5, 0.5);//set anchor to mid
 		this.jumpButton.fixedToCamera = true;//fix it to camera
@@ -635,7 +656,7 @@ var playState = {
 		this.jumpButton.alpha = 0.5;
 		this.jumpButton.events.onInputDown.add(this.setJumpTrue, this);
 		this.jumpButton.events.onInputUp.add(this.setJumpFalse, this);
-		
+
 		// Add the move left button
 		this.leftButton = game.add.sprite(50, 300, 'leftButton');
 		this.leftButton.anchor.setTo(0.5, 0.5);//set anchor to mid
@@ -647,7 +668,7 @@ var playState = {
 		this.leftButton.events.onInputOut.add(this.setLeftFalse, this);
 		this.leftButton.events.onInputDown.add(this.setLeftTrue, this);
 		this.leftButton.events.onInputUp.add(this.setLeftFalse, this);
-		
+
 		// Add the move right button
 		this.rightButton = game.add.sprite(130, 300, 'rightButton');
 		this.rightButton.anchor.setTo(0.5, 0.5);//set anchor to mid
@@ -659,7 +680,7 @@ var playState = {
 		this.rightButton.events.onInputOut.add(this.setRightFalse, this);
 		this.rightButton.events.onInputDown.add(this.setRightTrue, this);
 		this.rightButton.events.onInputUp.add(this.setRightFalse, this);
-		
+
 		// Add the attack button
 		this.attackButton = game.add.sprite(450, 300, 'aButton');
 		this.attackButton.anchor.setTo(0.5, 0.5);//set anchor to mid
@@ -669,7 +690,7 @@ var playState = {
 		this.attackButton.alpha = 0.5;
 		this.attackButton.events.onInputDown.add(this.setAttackTrue, this);
 		this.attackButton.events.onInputUp.add(this.setAttackFalse, this);
-		
+
 		// Add the interact button
 		this.interactButton = game.add.sprite(450, 225, 'bButton');
 		this.interactButton.anchor.setTo(0.5, 0.5);//set anchor to mid
@@ -681,7 +702,7 @@ var playState = {
 		this.interactButton.events.onInputUp.add(this.setInteractFalse, this);
 		console.log('create buttons');
 	},
-	
+
 	setLeftTrue: function() {
 		this.moveLeft = true;
 	},
