@@ -29,7 +29,7 @@ var playState = {
 		this.player.animations.add('attackright', ['male_melee_slashright01', 'male_melee_slashright02', 'male_melee_slashright03', 'male_melee_slashright04', 'male_melee_slashright05', 'male_melee_slashright06'], 8, false);
 		this.player.animations.add('respawn', ['male_melee_dead05', 'male_melee_dead04', 'male_melee_dead03', 'male_melee_dead02', 'male_melee_dead01', 'male_melee_alive01'], 8, false);
 
-		this.player.anchor.setTo(0.5, 0.5);
+		this.player.anchor.setTo(0.5, 1);
 		game.physics.arcade.enable(this.player);
 		this.player.body.gravity.y = 1000; //used to be 700
 
@@ -53,6 +53,11 @@ var playState = {
 		this.bossText.fixedToCamera = true;
 		this.bossText.cameraOffset.setTo(175, 10);
 		game.global.bossHP = 5000;
+
+		//add story text at the start
+//		this.storyText = game.add.text(0, 200, "Earth has drastically changed since the last time you were awake. You need to learn\nto adapt quickly or you might not survive. What? Why are you the only one uninfect-\ned? Oh, did I forget to tell you...\n                              You are the chosen one.\nHaha, no pressure, right? It is no big deal, it\'s just that out of however many bil-\nlion people you were the one gifted with immunity. I cannot explain why, or how, ju-\nst know that there are other humans still alive that are still fighting to survive.\nYou need to save them. How? Get to the next level. Press spacebar to begin!", { font: "10px Courier New", fill: "#ffffff"});
+//		this.storyText.fixedToCamera = true;
+//		this.storyText.cameraOffset.setTo(0, 200);
 
 		//add score
 		this.scoreText = game.add.text(325, 10, "Nonth\'s Brain: 0", { font: "18px Arial", fill: "#ffffff"});
@@ -85,7 +90,7 @@ var playState = {
 		//attack timers
 		this.bossAttack = game.time.now;//intervals between boss attacks
 		this.playerAttack = game.time.now;//intervals between player attacks
-		
+
 		if (!game.device.desktop) {
 			// Create an empty label to write the error message if needed
 			this.rotateLabel = game.add.text(game.width/2, game.height/2, '',
@@ -95,7 +100,7 @@ var playState = {
 			game.scale.onOrientationChange.add(this.orientationChange, this);
 			// Call the function at least once
 			this.orientationChange();
-			
+
 			//add mobile buttons
 			this.addMobileInputs();
 		}
@@ -106,7 +111,7 @@ var playState = {
 		game.physics.arcade.collide(this.player, this.layer);
 		game.physics.arcade.collide(this.player, this.boss);
 		game.physics.arcade.collide(this.enemies, this.layer);
-		
+
 		//check for boss distance
 		game.global.bossdist = this.boss.position.x - this.player.position.x;
 
@@ -119,15 +124,12 @@ var playState = {
 		//player collides with enemies
 		game.physics.arcade.overlap(this.player, this.enemies, this.playerDie, null, this);
 
-<<<<<<< HEAD
-=======
-		//player collides with chests
-		game.physics.arcade.overlap(this.player, this.chest, this.chestOpening, null, this);
-
 		//player collides with portals
 		game.physics.arcade.overlap(this.player, this.portals, this.portalEntering, null, this);
 
->>>>>>> parent of d38316f... added story to game state
+		//player collides with chests
+		game.physics.arcade.overlap(this.player, this.chests, this.chestOpening, null, this);
+
 		//Set parallex backgrounds
 		this.clouds.tilePosition.set(this.clouds.x * -0.1, 0);
 		this.sea.tilePosition.set(this.sea.x * -0.15, 0);
@@ -138,6 +140,7 @@ var playState = {
 			this.playerRespawn();
 			game.global.lastkey = 'dead';
 		}
+
 	},
 
 	movePlayer: function () {
@@ -149,7 +152,7 @@ var playState = {
 			this.attack = false;
 			this.interact = false;
 		}
-		
+
 		//if player is clicking attack key
 		if (this.input.keyboard.isDown(Phaser.Keyboard.ONE) || this.attack) {
 			game.global.lastkey = 'ONE';
@@ -238,7 +241,7 @@ var playState = {
 					case 3:
 					break;
 				}
-				
+
 				this.playerAttack = game.time.now + 1000;//next attack will be in 1 second
 			}
 			//default: do nothing
@@ -281,14 +284,9 @@ var playState = {
 			}*/
 		}
 		//check if jump button is pressed
-=======
 		if ((this.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR) || this.jump) && this.player.body.onFloor()) {
-<<<<<<< HEAD
 			this.player.body.velocity.y = -400;
->>>>>>> origin/gh-pages
-=======
-			this.player.body.velocity.y = -500;
->>>>>>> parent of d38316f... added story to game state
+//			this.storyText.text = "";
 		}
 	},
 
@@ -328,16 +326,13 @@ var playState = {
 		}
 	},
 
-<<<<<<< HEAD
-=======
 	chestOpening: function(player, chest) {
 		if (this.input.keyboard.isDown(Phaser.Keyboard.TWO) || this.interact) {
-			if(this.chestOpened == false) {
-				this.chest.animations.play('open');
-				this.chestOpened = true;
+			if(chest.isOpened == false) {
+				chest.animations.play('open');
+				chest.isOpened = true;
 			}
 		}
-		this.chestOpeningEnable = true;
 	},
 
 	portalEntering: function(player, portal) {
@@ -346,14 +341,18 @@ var playState = {
 		}
 	},
 
->>>>>>> parent of d38316f... added story to game state
+	changeLevel: function(level) {
+		game.global.playLevel = level;
+		game.state.start('play');
+	},
+
 	addEnemy: function() {
 		this.enemies = game.add.group();
 
 		switch (game.global.playLevel) {
 			default:
 			case 1:
-			
+
 			//add enemy01
 			this.enemy01 = game.add.sprite(800, 1741, 'woodie', 'Woodie_left_01');
 			this.enemies.add(this.enemy01);//add to group
@@ -366,7 +365,7 @@ var playState = {
 			this.enemy01.body.gravity.y = 700;
 			this.enemy01.body.collideWorldBounds = true;//make the enemy collide with the borders of the game
 			this.enemy01.body.immovable = true;//so the player can't push them
-			
+
 			//add enemy02
 			this.enemy02 = game.add.sprite(5570, 1500, 'banshee', 'banshee_left_01');
 			this.enemies.add(this.enemy02);//add to group
@@ -379,7 +378,7 @@ var playState = {
 			this.enemy02.body.gravity.y = 700;
 			this.enemy02.body.collideWorldBounds = true;//make the enemy collide with the borders of the game
 			this.enemy02.body.immovable = true;//so the player can't push them
-			
+
 			//add boss
 			this.boss = game.add.sprite(6620, 1479, 'boss', 'pope_normal_idle_left_01');
 			this.boss.anchor.setTo(0.5, 0.5);
@@ -437,7 +436,7 @@ var playState = {
 				this.enemy01.animations.play('enemy01_left');
 				this.enemy01.body.velocity.x = -100;
 			}
-			
+
 			//move enemy02
 			if (this.enemy02.position.x  < 5571) {
 				this.enemy02.animations.play('enemy02_right');
@@ -488,11 +487,6 @@ var playState = {
 			case 3:
 			break;
 		}
-	},
-
-	changeLevel: function(level) {
-		game.global.playLevel = level;
-		game.state.start('play');
 	},
 
 	render: function () {
@@ -556,16 +550,24 @@ var playState = {
 				this.layer.resizeWorld();
 				this.layer3 = this.map.createLayer('Tile Layer 3');
 				this.map.setCollisionBetween(1, 1159, true, this.layer);
-				this.playerBirthPlaceX = 16;
-				this.playerBirthPlaceY = 1880;
+//				this.playerBirthPlaceX = 16;
+//				this.playerBirthPlaceY = 1880;
+				this.playerBirthPlaceX = 959; // Latte tests the chest at the end of the map
+				this.playerBirthPlaceY = 1741;
 				this.deadLine = 2100;
-<<<<<<< HEAD
-=======
-//				this.chest = game.add.sprite(7156, 1520, 'purple_chest', 'purple_chest_01');
-//				this.chest.animations.add('open', ['purple_chest_02', 'purple_chest_03', 'purple_chest_04'], 8, false);
-//				this.chest.anchor.setTo(0.5, 1);
-//				this.chestOpened = false;
-//				game.physics.arcade.enable(this.chest);
+				//adding chests
+				this.chest01 = game.add.sprite(976, 1790, 'purple_chest', 'purple_chest_01');
+				this.chests.add(this.chest01);
+				this.chest01.animations.add('open', ['purple_chest_02', 'purple_chest_03', 'purple_chest_04'], 8, false);
+				this.chest01.anchor.setTo(0.5, 1);
+				this.chest01.isOpened = false;
+				this.chest01.getScore = 1000;
+				this.chest02 = game.add.sprite(2283, 1599, 'purple_chest', 'purple_chest_01');
+				this.chests.add(this.chest02);
+				this.chest02.animations.add('open', ['purple_chest_02', 'purple_chest_03', 'purple_chest_04'], 8, false);
+				this.chest02.anchor.setTo(0.5, 1);
+				this.chest02.isOpened = false;
+				this.chest02.getScore = 1000;
 				//adding portal
 				this.portal01 = game.add.sprite(7135, 1475, 'portal', 'portal_01');
 				this.portals.add(this.portal01);
@@ -574,7 +576,6 @@ var playState = {
 				this.portal01.anchor.setTo(0.5, 0.5);
 				this.portal01.gotoLevel = 2;
 				//adding music
->>>>>>> parent of d38316f... added story to game state
 				this.bgMusic = game.add.audio('Level_1');
 				this.bgMusic.loop = true;
 				this.bgMusic.play();
@@ -650,6 +651,9 @@ var playState = {
 				break;
 
 			case 5:
+				this.sky = game.add.tileSprite(0, 0, game.width, game.height, 'sky_dark');
+				this.clouds = game.add.tileSprite(0, 100, game.width, 236, 'cloud_dark');
+				this.sea = game.add.tileSprite(0, 250, game.width, 96, 'sea_dark');
 				this.map = game.add.tilemap('map-5');
 				this.map.addTilesetImage('tileset-1');
 				this.layer2 = this.map.createLayer('Tile Layer 2');
@@ -677,7 +681,11 @@ var playState = {
 				this.portal02.animations.play('loop');
 				this.portal02.anchor.setTo(0.5, 0.5);
 				break;
+
 			case 6:
+				this.sky = game.add.tileSprite(0, 0, game.width, game.height, 'sky_dark');
+				this.clouds = game.add.tileSprite(0, 100, game.width, 236, 'cloud_dark');
+				this.sea = game.add.tileSprite(0, 250, game.width, 96, 'sea_dark');
 				this.map = game.add.tilemap('map-6');
 				this.map.addTilesetImage('tileset-1');
 				this.layer2 = this.map.createLayer('Tile Layer 2');
@@ -693,6 +701,9 @@ var playState = {
 		//show portals at front, add physics
 		game.world.bringToTop(this.portals);
 		game.physics.arcade.enable(this.portals);
+		//show chests at front, add physics
+		game.world.bringToTop(this.chests);
+		game.physics.arcade.enable(this.chests);
 		//set up some bg image
 		this.sky.fixedToCamera = true;
 		this.sky.tileScale.set(1.5);
@@ -701,7 +712,7 @@ var playState = {
 		this.sea.tileScale.set(1.1);
 		return;
 	},
-	
+
 	orientationChange: function() {
 		// If the game is in portrait (wrong orientation)
 		if (game.scale.isPortrait) {
@@ -718,7 +729,7 @@ var playState = {
 			this.rotateLabel.text = '';
 		}
 	},
-	
+
 	addMobileInputs: function() {
 		// Movement variables
 		this.moveLeft = false;
@@ -726,8 +737,8 @@ var playState = {
 		this.jump = false;
 		this.attack = false;
 		this.interact = false;
-		
-		// Add the jump button		
+
+		// Add the jump button
 		this.jumpButton = game.add.sprite(370, 1900, 'upButton');
 		this.jumpButton.anchor.setTo(0.5, 0.5);//set anchor to mid
 		this.jumpButton.fixedToCamera = true;//fix it to camera
@@ -736,7 +747,7 @@ var playState = {
 		this.jumpButton.alpha = 0.5;
 		this.jumpButton.events.onInputDown.add(this.setJumpTrue, this);
 		this.jumpButton.events.onInputUp.add(this.setJumpFalse, this);
-		
+
 		// Add the move left button
 		this.leftButton = game.add.sprite(50, 300, 'leftButton');
 		this.leftButton.anchor.setTo(0.5, 0.5);//set anchor to mid
@@ -748,7 +759,7 @@ var playState = {
 		this.leftButton.events.onInputOut.add(this.setLeftFalse, this);
 		this.leftButton.events.onInputDown.add(this.setLeftTrue, this);
 		this.leftButton.events.onInputUp.add(this.setLeftFalse, this);
-		
+
 		// Add the move right button
 		this.rightButton = game.add.sprite(130, 300, 'rightButton');
 		this.rightButton.anchor.setTo(0.5, 0.5);//set anchor to mid
@@ -760,7 +771,7 @@ var playState = {
 		this.rightButton.events.onInputOut.add(this.setRightFalse, this);
 		this.rightButton.events.onInputDown.add(this.setRightTrue, this);
 		this.rightButton.events.onInputUp.add(this.setRightFalse, this);
-		
+
 		// Add the attack button
 		this.attackButton = game.add.sprite(450, 300, 'aButton');
 		this.attackButton.anchor.setTo(0.5, 0.5);//set anchor to mid
@@ -770,7 +781,7 @@ var playState = {
 		this.attackButton.alpha = 0.5;
 		this.attackButton.events.onInputDown.add(this.setAttackTrue, this);
 		this.attackButton.events.onInputUp.add(this.setAttackFalse, this);
-		
+
 		// Add the interact button
 		this.interactButton = game.add.sprite(450, 225, 'bButton');
 		this.interactButton.anchor.setTo(0.5, 0.5);//set anchor to mid
@@ -782,7 +793,7 @@ var playState = {
 		this.interactButton.events.onInputUp.add(this.setInteractFalse, this);
 		console.log('create buttons');
 	},
-	
+
 	setLeftTrue: function() {
 		this.moveLeft = true;
 	},
