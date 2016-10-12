@@ -39,7 +39,7 @@ var playState = {
 
 		this.player.anchor.setTo(0.5, 0.5);
 		game.physics.arcade.enable(this.player);
-		this.player.body.gravity.y = 900; //used to be 700
+		this.player.body.gravity.y = 1000; //used to be 700
 
 		//set player collide world bounds top, right, left only
 		this.player.body.collideWorldBounds = true;
@@ -63,7 +63,7 @@ var playState = {
 		game.global.bossHP = 5000;
 
 		//add score
-		this.scoreText = game.add.text(400, 10, "Score: 0", { font: "18px Arial", fill: "#ffffff"});
+		this.scoreText = game.add.text(350, 10, "Score: 0", { font: "18px Arial", fill: "#ffffff"});
 		this.scoreText.fixedToCamera = true;
 		this.scoreText.cameraOffset.setTo(400, 10);
 		game.global.score = 0;
@@ -102,9 +102,7 @@ var playState = {
 		game.physics.arcade.collide(this.player, this.layer);
 		game.physics.arcade.collide(this.player, this.boss);
 		game.physics.arcade.collide(this.enemies, this.layer);
-		game.physics.arcade.collide(this.enemy01, this.layer);
-		//game.physics.arcade.collide(this.enemy01, this.layer);
-
+		
 		//check for boss distance
 		game.global.bossdist = this.boss.position.x - this.player.position.x;
 
@@ -115,7 +113,6 @@ var playState = {
 		this.moveEnemy();
 
 		//player collides with enemies
-		//game.physics.arcade.collide(this.player, this.enemy01);
 		game.physics.arcade.overlap(this.player, this.enemies, this.playerDie, null, this);
 
 		//Set parallex backgrounds
@@ -143,13 +140,15 @@ var playState = {
 				}, this); //idle right after animation finishes
 			}
 			//check if player is facing right
-			else if (game.global.lastdir == 'right') {
+			else if ((this.playerAttack < game.time.now)&&(game.global.lastdir == 'right')) {
 				this.player.animations.play('attackright');//attack facing right
 				this.player.animations.currentAnim.onComplete.add(function () {game.global.lastkey = 'RIGHT';}, this);//idle right after animation finishes
 
 				switch (game.global.playLevel) {
 					default:
 					case 1:
+
+					//attacking boss
 					if ((this.playerAttack < game.time.now)&&(game.global.bossdist<100)) {
 
 						if (game.global.bossHP == 1000) {
@@ -160,7 +159,6 @@ var playState = {
 
 						game.global.bossHP -= 1000;
 						this.bossText.text = 'Boss HP: ' + game.global.bossHP;
-						this.playerAttack = game.time.now + 1000;//next attack will be in 1 second
 
 						//add emitter for hurting boss
 						game.time.events.add(Phaser.Timer.SECOND * .25, function(){
@@ -170,16 +168,43 @@ var playState = {
 							this.emitter.start(true, 800, null, 20);// Start the emitter by exploding 15 particles that will live 800ms
 						}, this);
 					}
-					//if (game.global.bossdist < 100) {
+					//attacking enemy01
+					var e1 = this.enemy01.position.x - this.player.position.x;
+					if ((e1 < 100)&&(this.enemy01.alive)) {
+						game.time.events.add(Phaser.Timer.SECOND * .25, function(){
+							this.enemy01.kill();
+							game.global.score += 1000;
+							this.scoreText.text = 'Score: ' + game.global.score;
+							// Set the position of the emitter
+							this.emitter.x = this.enemy01.x;
+							this.emitter.y = this.enemy01.y;
+							this.emitter.start(true, 800, null, 15);// Start the emitter by exploding 15 particles that will live 800ms
+						}, this);
+					}
+					//attacking enemy02
+					var e2 = this.enemy02.position.x - this.player.position.x;
+					if ((e2 < 200)&&(this.enemy02.alive)) {
+						console.log('banshee close');
+						game.time.events.add(Phaser.Timer.SECOND * .25, function(){
+							this.enemy02.kill();
+							game.global.score += 1000;
+							this.scoreText.text = 'Score: ' + game.global.score;
+							// Set the position of the emitter
+							this.emitter.x = this.enemy02.x;
+							this.emitter.y = this.enemy02.y;
+							this.emitter.start(true, 800, null, 15);// Start the emitter by exploding 15 particles that will live 800ms
+						}, this);
+					}
 
-					//}
 					break;
 
 					case 2:
 					var e1 = this.enemy01.position.x - this.player.position.x;
-					if (e1 < 100) {
+					if ((e1 < 100)&&(this.enemy01.alive)) {
 						game.time.events.add(Phaser.Timer.SECOND * .25, function(){
 							this.enemy01.kill();
+							game.global.score += 5000;
+							this.scoreText.text = 'Score: ' + game.global.score;
 							// Set the position of the emitter
 							this.emitter.x = this.enemy01.x;
 							this.emitter.y = this.enemy01.y;
@@ -191,6 +216,8 @@ var playState = {
 					case 3:
 					break;
 				}
+				
+				this.playerAttack = game.time.now + 1000;//next attack will be in 1 second
 			}
 			//default: do nothing
 			else {
@@ -275,8 +302,35 @@ var playState = {
 		switch (game.global.playLevel) {
 			default:
 			case 1:
+			
+			//add enemy01
+			this.enemy01 = game.add.sprite(800, 1741, 'woodie', 'Woodie_left_01');
+			this.enemies.add(this.enemy01);//add to group
+			//add animation from atlas
+			this.enemy01.animations.add('enemy01_left', ['Woodie_left_01', 'Woodie_left_02', 'Woodie_left_03', 'Woodie_left_04', 'Woodie_left_05', 'Woodie_left_06'], 8, true);
+			this.enemy01.animations.add('enemy01_right', ['Woodie_right_01', 'Woodie_right_02', 'Woodie_right_03', 'Woodie_right_04', 'Woodie_right_05', 'Woodie_right_06'], 8, true);
+			//add physics
+			this.enemy01.anchor.setTo(0.5, 0.5);
+			game.physics.arcade.enable(this.enemy01);
+			this.enemy01.body.gravity.y = 700;
+			this.enemy01.body.collideWorldBounds = true;//make the enemy collide with the borders of the game
+			this.enemy01.body.immovable = true;//so the player can't push them
+			
+			//add enemy02
+			this.enemy02 = game.add.sprite(1200, 1741, 'banshee', 'banshee_left_01');
+			this.enemies.add(this.enemy02);//add to group
+			//add animation from atlas
+			this.enemy02.animations.add('enemy02_left', ['banshee_left_01', 'banshee_left_02', 'banshee_left_03', 'banshee_left_04', 'banshee_left_05', 'banshee_left_06'], 8, true);
+			this.enemy02.animations.add('enemy02_right', ['banshee_right_01', 'banshee_right_02', 'banshee_right_03', 'banshee_right_04', 'banshee_right_05', 'banshee_right_06'], 8, true);
+			//add physics
+			this.enemy02.anchor.setTo(0.5, 0.5);
+			game.physics.arcade.enable(this.enemy02);
+			this.enemy02.body.gravity.y = 700;
+			this.enemy02.body.collideWorldBounds = true;//make the enemy collide with the borders of the game
+			this.enemy02.body.immovable = true;//so the player can't push them
+			
 			//add boss
-			this.boss = game.add.sprite(1400, 1750, 'boss', 'pope_normal_idle_left_01');
+			this.boss = game.add.sprite(2300, 1559, 'boss', 'pope_normal_idle_left_01');
 			this.boss.anchor.setTo(0.5, 0.5);
 			game.physics.arcade.enable(this.boss);
 			this.boss.body.immovable = true;//so the player can't push them
@@ -297,14 +351,12 @@ var playState = {
 			case 2:
 
 			//add enemy
-			this.enemy01 = game.add.sprite(800, 1880, 'enemy01', 'curupira_left01');
+			this.enemy01 = game.add.sprite(800, 1880, 'curupira', 'curupira_left01');
 			this.enemies.add(this.enemy01);//add to group
 
 			//add animation from atlas
 			this.enemy01.animations.add('enemy01_left', ['curupira_left01', 'curupira_left02', 'curupira_left03', 'curupira_left04', 'curupira_left05', 'curupira_left06'], 8, true);
 			this.enemy01.animations.add('enemy01_right', ['curupira_right01', 'curupira_right02', 'curupira_right03', 'curupira_right04', 'curupira_right05', 'curupira_right06'], 8, true);
-			this.enemy01.animations.add('enemy01_deadleft', ['curupira_deadleft01', 'curupira_deadleft02'], 8, false);
-			this.enemy01.animations.add('enemy01_deadright', ['curupira_deadright01', 'curupira_deadright02'], 8, false);
 
 			this.enemy01.anchor.setTo(0.5, 0.5);
 			game.physics.arcade.enable(this.enemy01);
@@ -324,6 +376,26 @@ var playState = {
 		switch (game.global.playLevel) {
 			default:
 			case 1:
+
+			//move enemy01
+			if (this.enemy01.position.x  < 601) {
+				this.enemy01.animations.play('enemy01_right');
+				this.enemy01.body.velocity.x = 100;
+			}
+			else if (this.enemy01.position.x > 799) {
+				this.enemy01.animations.play('enemy01_left');
+				this.enemy01.body.velocity.x = -100;
+			}
+			
+			//move enemy02
+			if (this.enemy02.position.x  < 1201) {
+				this.enemy02.animations.play('enemy02_right');
+				this.enemy02.body.velocity.x = 100;
+			}
+			else if (this.enemy02.position.x > 1499) {
+				this.enemy02.animations.play('enemy02_left');
+				this.enemy02.body.velocity.x = -100;
+			}
 
 			//if it has been more than 5 secs since last attack and player is less than 300 units from boss
 			if ((this.boss.alive)&&(this.bossAttack < game.time.now)&&(game.global.bossdist<300)) {

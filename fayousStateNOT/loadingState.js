@@ -18,7 +18,9 @@ var loadState = {
 		//enemy atlas
 		game.load.atlasJSONArray('boss', 'assets/pope_normal.png', 'assets/pope_normal.json');
 		game.load.atlasJSONArray('lightning', 'assets/lightning.png', 'assets/lightning.json');
-		game.load.atlasJSONArray('enemy01', 'assets/curupira.png', 'assets/curupira.json');
+		game.load.atlasJSONArray('curupira', 'assets/curupira.png', 'assets/curupira.json');
+		game.load.atlasJSONArray('woodie', 'assets/woodie.png', 'assets/woodie.json');
+		game.load.atlasJSONArray('banshee', 'assets/banshee.png', 'assets/banshee.json');
 		game.load.image('blood', 'assets/blood.png');
 
 		//asset for play state
