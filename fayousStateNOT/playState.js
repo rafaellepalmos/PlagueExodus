@@ -240,6 +240,29 @@ var playState = {
 
 					case 3:
 					break;
+
+					case 4:
+					//wolfie
+					var e1 = this.enemy01.position.x - this.player.position.x;
+					if ((e1 < 100)&&(this.enemy01.alive)) {
+						game.time.events.add(Phaser.Timer.SECOND * .25, function(){
+							this.enemy01.kill();
+							game.global.score += 1111;
+							this.scoreText.text = 'Nonth\'s Brain: ' + game.global.score;
+							// Set the position of the emitter
+							this.emitter.x = this.enemy01.x;
+							this.emitter.y = this.enemy01.y;
+							this.emitter.start(true, 800, null, 15);// Start the emitter by exploding 15 particles that will live 800ms
+						}, this);
+					}
+
+					break;
+
+					case 5:
+					break;
+
+					case 6:
+					break;
 				}
 
 				this.playerAttack = game.time.now + 1000;//next attack will be in 1 second
@@ -285,7 +308,7 @@ var playState = {
 		}
 		//check if jump button is pressed
 		if ((this.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR) || this.jump) && this.player.body.onFloor()) {
-			this.player.body.velocity.y = -400;
+			this.player.body.velocity.y = -500;
 //			this.storyText.text = "";
 		}
 	},
@@ -418,6 +441,28 @@ var playState = {
 
 			case 3:
 			break;
+
+			case 4:
+			//wolfie enemy
+			this.enemy01 = game.add.sprite(2092, 9708, 'wolfie', 'wolf_left_01');
+			this.enemies.add(this.enemy01);//add to group
+			//add animation from atlas
+			this.enemy01.animations.add('enemy01_left', ['wolf_left_01', 'wolf_left_02', 'wolf_left_03', 'wolf_left_04'], 8, true);
+			this.enemy01.animations.add('enemy01_right', ['wolf_right_01', 'wolf_right_02', 'wolf_right_03', 'wolf_right_04'], 8, true);
+			//add physics
+			this.enemy01.anchor.setTo(0.5, 0.5);
+			game.physics.arcade.enable(this.enemy01);
+			this.enemy01.body.gravity.y = 700;
+			this.enemy01.body.collideWorldBounds = true;//make the enemy collide with the borders of the game
+			this.enemy01.body.immovable = true;//so the player can't push them
+
+			break;
+
+			case 5:
+			break;
+
+			case 6:
+			break;
 		}
 	},
 
@@ -486,6 +531,27 @@ var playState = {
 
 			case 3:
 			break;
+
+			case 4:
+
+			if (this.enemy01.position.x  < 2092) {
+				this.enemy01.animations.play('enemy01_right');
+				this.enemy01.body.velocity.x = 100;
+			}
+			else if (this.enemy01.position.x > 2655) {
+				this.enemy01.animations.play('enemy01_left');
+				this.enemy01.body.velocity.x = -100;
+			}
+
+			break;
+
+			case 5:
+			break;
+
+			case 6:
+			break;
+
+
 		}
 	},
 
