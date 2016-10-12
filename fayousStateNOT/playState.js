@@ -55,19 +55,19 @@ var playState = {
 		//add enemies
 		this.addEnemy();//add enemy to map
 		this.moveEnemy();//move the enemy back and forth
-		
+
 		//add boss health
 		this.bossText = game.add.text(200, 10, "Boss HP: 5000", { font: "18px Arial", fill: "#ffffff"});
 		this.bossText.fixedToCamera = true;
 		this.bossText.cameraOffset.setTo(200, 10);
 		game.global.bossHP = 5000;
-		
+
 		//add score
 		this.scoreText = game.add.text(350, 10, "Score: 0", { font: "18px Arial", fill: "#ffffff"});
 		this.scoreText.fixedToCamera = true;
 		this.scoreText.cameraOffset.setTo(400, 10);
 		game.global.score = 0;
-		
+
 		//particles for blood explosion
 		this.emitter = game.add.emitter(0, 0, 15); //create emitter with x,y,# of particles
 		this.emitter.makeParticles('blood');// Set blood for the particles
@@ -89,12 +89,12 @@ var playState = {
 
 		//variable to store last key pressed
 		game.global.lastkey = '';
-		
+
 		//attack timers
 		this.bossAttack = game.time.now;//intervals between boss attacks
 		this.playerAttack = game.time.now;//intervals between player attacks
-		
-		
+
+
 	},
 
 	update: function () {
@@ -143,22 +143,23 @@ var playState = {
 			else if ((this.playerAttack < game.time.now)&&(game.global.lastdir == 'right')) {
 				this.player.animations.play('attackright');//attack facing right
 				this.player.animations.currentAnim.onComplete.add(function () {game.global.lastkey = 'RIGHT';}, this);//idle right after animation finishes
-				
+
 				switch (game.global.playLevel) {
 					default:
 					case 1:
+
 					//attacking boss
-					if (game.global.bossdist<100) {
-						
+					if ((this.playerAttack < game.time.now)&&(game.global.bossdist<100)) {
+
 						if (game.global.bossHP == 1000) {
 							this.boss.kill();
 							game.global.score += 5000;
 							this.scoreText.text = 'Score: ' + game.global.score;
 						}
-						
+
 						game.global.bossHP -= 1000;
 						this.bossText.text = 'Boss HP: ' + game.global.bossHP;
-						
+
 						//add emitter for hurting boss
 						game.time.events.add(Phaser.Timer.SECOND * .25, function(){
 							// Set the position of the emitter
@@ -194,6 +195,7 @@ var playState = {
 							this.emitter.start(true, 800, null, 15);// Start the emitter by exploding 15 particles that will live 800ms
 						}, this);
 					}
+
 					break;
 
 					case 2:
@@ -257,7 +259,7 @@ var playState = {
 			this.player.body.velocity.y = -400;
 		}
 	},
-	
+
 	heartReduce: function() {
 		game.global.playerhp -= 1;
 		if (game.global.playerhp > 0){
@@ -269,7 +271,7 @@ var playState = {
 			this.playerRespawn();
 		}
 	},
-	
+
 	playerDie: function() {
 		this.playerRespawn();
 		game.global.playerhp -= 1;
@@ -332,16 +334,16 @@ var playState = {
 			this.boss.anchor.setTo(0.5, 0.5);
 			game.physics.arcade.enable(this.boss);
 			this.boss.body.immovable = true;//so the player can't push them
-			
+
 			//add boss animation
 			this.boss.animations.add('atk', ['pope_normal_attack_left_01', 'pope_normal_attack_left_02', 'pope_normal_attack_left_03', 'pope_normal_attack_left_04', 'pope_normal_attack_left_05', 'pope_normal_attack_left_06', 'pope_normal_attack_left_07', 'pope_normal_attack_left_08'], 8, false);
 			this.boss.animations.add('idle', ['pope_normal_idle_left_01', 'pope_normal_idle_left_02', 'pope_normal_idle_left_03', 'pope_normal_idle_left_04', 'pope_normal_idle_left_05', 'pope_normal_idle_left_06'], 8, true);
-			
+
 			//add lightning
 			this.lightning = game.add.sprite(this.player.position.x-10, this.player.position.y-90, 'lightning', 'lightning_01');
 			this.lightning.anchor.setTo(0.5, 0.5);
 			this.lightning.kill();
-			
+
 			//add lightning animation
 			this.lightning.animations.add('lightning', ['lightning_01', 'lightning_02', 'lightning_03', 'lightning_04'], 8, false);
 			break;
@@ -374,7 +376,7 @@ var playState = {
 		switch (game.global.playLevel) {
 			default:
 			case 1:
-			
+
 			//move enemy01
 			if (this.enemy01.position.x  < 601) {
 				this.enemy01.animations.play('enemy01_right');
@@ -394,18 +396,18 @@ var playState = {
 				this.enemy02.animations.play('enemy02_left');
 				this.enemy02.body.velocity.x = -100;
 			}
-			
+
 			//if it has been more than 5 secs since last attack and player is less than 300 units from boss
 			if ((this.boss.alive)&&(this.bossAttack < game.time.now)&&(game.global.bossdist<300)) {
 				this.boss.animations.play('atk');//play boss attack animation
-				
+
 				//add a delay to playing lightning animation
 				game.time.events.add(Phaser.Timer.SECOND * 1, function(){
 					this.lightning.reset(this.player.position.x-10, this.player.position.y-90)//spawn lightning at the player position
 					this.lightning.animations.play('lightning');//play lightning animation
 					this.heartReduce();//hurt the player
 					}, this);
-				
+
 				//when animation is done, do this:
 				this.lightning.animations.currentAnim.onComplete.add(function () {
 					//add a small delay before going idle mode
@@ -414,7 +416,7 @@ var playState = {
 						this.boss.animations.play('idle');//play idle animation on boss
 						}, this);
 					}, this);
-				
+
 				this.bossAttack = game.time.now + 5000;//next attack will be in 5 seconds
 			}
 			break;
