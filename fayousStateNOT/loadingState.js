@@ -31,6 +31,13 @@ var loadState = {
 		game.load.image('sky_dark', 'assets/platforms/set-1/sky_dark.png');
 		game.load.image('sea_dark', 'assets/platforms/set-1/sea_dark.png');
 		game.load.image('enemy', 'assets/enemy.png');
+		
+		//Buttons
+		game.load.image('upButton', 'assets/buttons/upButton.png');
+		game.load.image('rightButton', 'assets/buttons/rightButton.png');
+		game.load.image('leftButton', 'assets/buttons/leftButton.png');
+		game.load.image('aButton', 'assets/buttons/aButton.png');
+		game.load.image('bButton', 'assets/buttons/bButton.png');
 
 		//// Audio
 		game.load.audio('Menu_Theme', ['assets/Soundtrack/Menu_Theme.mp3', 'assets/Soundtrack/Menu_Theme.ogg']);

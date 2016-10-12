@@ -14,17 +14,6 @@ var playState = {
 	},
 
 	create: function () {
-		if (!game.device.desktop) {
-			// Create an empty label to write the error message if needed
-			this.rotateLabel = game.add.text(game.width/2, game.height/2, '',
-			{ font: '30px Arial', fill: '#fff', backgroundColor: '#000' });
-			this.rotateLabel.anchor.setTo(0.5, 0.5);
-			// Call 'orientationChange' when the device is rotated
-			game.scale.onOrientationChange.add(this.orientationChange, this);
-			// Call the function at least once
-			this.orientationChange();
-		}
-
 		//Kill loading label and progressbar when it's done
 		this.loadingLabel.kill();
 		this.progressBar.kill();
@@ -96,8 +85,20 @@ var playState = {
 		//attack timers
 		this.bossAttack = game.time.now;//intervals between boss attacks
 		this.playerAttack = game.time.now;//intervals between player attacks
-
-
+		
+		if (!game.device.desktop) {
+			// Create an empty label to write the error message if needed
+			this.rotateLabel = game.add.text(game.width/2, game.height/2, '',
+			{ font: '30px Arial', fill: '#fff', backgroundColor: '#000' });
+			this.rotateLabel.anchor.setTo(0.5, 0.5);
+			// Call 'orientationChange' when the device is rotated
+			game.scale.onOrientationChange.add(this.orientationChange, this);
+			// Call the function at least once
+			this.orientationChange();
+			
+			//add mobile buttons
+			this.addMobileInputs();
+		}
 	},
 
 	update: function () {
@@ -131,8 +132,17 @@ var playState = {
 	},
 
 	movePlayer: function () {
+		if (game.input.totalActivePointers == 0) {
+			// Make sure the player is not moving
+			this.moveLeft = false;
+			this.moveRight = false;
+			this.jump = false;
+			this.attack = false;
+			this.interact = false;
+		}
+		
 		//if player is clicking attack key
-		if (this.input.keyboard.isDown(Phaser.Keyboard.ONE)) {
+		if (this.input.keyboard.isDown(Phaser.Keyboard.ONE) || this.attack) {
 			game.global.lastkey = 'ONE';
 			console.log("attacking"); //to debug
 			//check if player is facing left
@@ -227,8 +237,12 @@ var playState = {
 				return;
 			}
 		}
+		//else if player is pressing 2
+		else if (this.input.keyboard.isDown(Phaser.Keyboard.TWO) || this.interact) {
+			console.log("interacting"); //to debug
+		}
 		//else if player is pressing left
-		else if (this.cursor.left.isDown) {
+		else if (this.cursor.left.isDown || this.moveLeft) {
 			console.log("going left"); //to debug
 			game.global.lastdir = 'left'; //last direction player was facing
 			this.player.body.velocity.x = -200;
@@ -236,7 +250,7 @@ var playState = {
 			game.global.lastkey = 'LEFT';
 		}
 		//else if player is pressing right
-		else if (this.cursor.right.isDown) {
+		else if (this.cursor.right.isDown || this.moveRight) {
 			console.log("going right"); //to debug
 			game.global.lastdir = 'right'; //last direction player was facing
 			this.player.body.velocity.x = 200;
@@ -258,7 +272,7 @@ var playState = {
 			}*/
 		}
 		//check if jump button is pressed
-		if (this.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR) && this.player.body.onFloor()) {
+		if ((this.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR) || this.jump) && this.player.body.onFloor()) {
 			this.player.body.velocity.y = -400;
 		}
 	},
@@ -591,14 +605,111 @@ var playState = {
 		// If the game is in portrait (wrong orientation)
 		if (game.scale.isPortrait) {
 			// Pause the game and add a text explanation
+			console.log('game paused');
 			game.paused = true;
 			this.rotateLabel.text = 'rotate your device in landscape';
 		}
 		// If the game is in landscape (good orientation)
 		else {
 			// Resume the game and remove the text
+			console.log('game resumed');
 			game.paused = false;
 			this.rotateLabel.text = '';
 		}
+	},
+	
+	addMobileInputs: function() {
+		// Movement variables
+		this.moveLeft = false;
+		this.moveRight = false;
+		this.jump = false;
+		this.attack = false;
+		this.interact = false;
+		
+		// Add the jump button		
+		this.jumpButton = game.add.sprite(370, 1900, 'upButton');
+		this.jumpButton.anchor.setTo(0.5, 0.5);//set anchor to mid
+		this.jumpButton.fixedToCamera = true;//fix it to camera
+		this.jumpButton.cameraOffset.setTo(370, 300);//set the location of button in relation to the camera
+		this.jumpButton.inputEnabled = true;
+		this.jumpButton.alpha = 0.5;
+		this.jumpButton.events.onInputDown.add(this.setJumpTrue, this);
+		this.jumpButton.events.onInputUp.add(this.setJumpFalse, this);
+		
+		// Add the move left button
+		this.leftButton = game.add.sprite(50, 300, 'leftButton');
+		this.leftButton.anchor.setTo(0.5, 0.5);//set anchor to mid
+		this.leftButton.fixedToCamera = true;//fix it to camera
+		this.leftButton.cameraOffset.setTo(50, 300);//set the location of button in relation to the camera
+		this.leftButton.inputEnabled = true;
+		this.leftButton.alpha = 0.5;
+		this.leftButton.events.onInputOver.add(this.setLeftTrue, this);
+		this.leftButton.events.onInputOut.add(this.setLeftFalse, this);
+		this.leftButton.events.onInputDown.add(this.setLeftTrue, this);
+		this.leftButton.events.onInputUp.add(this.setLeftFalse, this);
+		
+		// Add the move right button
+		this.rightButton = game.add.sprite(130, 300, 'rightButton');
+		this.rightButton.anchor.setTo(0.5, 0.5);//set anchor to mid
+		this.rightButton.fixedToCamera = true;//fix it to camera
+		this.rightButton.cameraOffset.setTo(130, 300);//set the location of button in relation to the camera
+		this.rightButton.inputEnabled = true;
+		this.rightButton.alpha = 0.5;
+		this.rightButton.events.onInputOver.add(this.setRightTrue, this);
+		this.rightButton.events.onInputOut.add(this.setRightFalse, this);
+		this.rightButton.events.onInputDown.add(this.setRightTrue, this);
+		this.rightButton.events.onInputUp.add(this.setRightFalse, this);
+		
+		// Add the attack button
+		this.attackButton = game.add.sprite(450, 300, 'aButton');
+		this.attackButton.anchor.setTo(0.5, 0.5);//set anchor to mid
+		this.attackButton.fixedToCamera = true;//fix it to camera
+		this.attackButton.cameraOffset.setTo(450, 300);//set the location of button in relation to the camera
+		this.attackButton.inputEnabled = true;
+		this.attackButton.alpha = 0.5;
+		this.attackButton.events.onInputDown.add(this.setAttackTrue, this);
+		this.attackButton.events.onInputUp.add(this.setAttackFalse, this);
+		
+		// Add the interact button
+		this.interactButton = game.add.sprite(450, 225, 'bButton');
+		this.interactButton.anchor.setTo(0.5, 0.5);//set anchor to mid
+		this.interactButton.fixedToCamera = true;//fix it to camera
+		this.interactButton.cameraOffset.setTo(450, 225);//set the location of button in relation to the camera
+		this.interactButton.inputEnabled = true;
+		this.interactButton.alpha = 0.5;
+		this.interactButton.events.onInputDown.add(this.setInteractTrue, this);
+		this.interactButton.events.onInputUp.add(this.setInteractFalse, this);
+		console.log('create buttons');
+	},
+	
+	setLeftTrue: function() {
+		this.moveLeft = true;
+	},
+	setLeftFalse: function() {
+		this.moveLeft = false;
+	},
+	setRightTrue: function() {
+		this.moveRight = true;
+	},
+	setRightFalse: function() {
+		this.moveRight = false;
+	},
+	setJumpTrue: function() {
+		this.jump = true;
+	},
+	setJumpFalse: function() {
+		this.jump = false;
+	},
+	setAttackTrue: function() {
+		this.attack = true;
+	},
+	setAttackFalse: function() {
+		this.attack = false;
+	},
+	setInteractTrue: function() {
+		this.interact = true;
+	},
+	setInteractFalse: function() {
+		this.interact = false;
 	},
 }
