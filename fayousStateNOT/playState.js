@@ -14,13 +14,16 @@ var playState = {
 	},
 
 	create: function () {
-		// this.enemies = game.add.group();
-		// //add physics to the gruop
-		// this.enemies.enableBody = true;
-		// //Create enemies
-		// this.enemies.createMultiple(1, 'enemy');
-		// this.addEnemy();
-		// extra stuff, remove later
+		if (!game.device.desktop) {
+			// Create an empty label to write the error message if needed
+			this.rotateLabel = game.add.text(game.width/2, game.height/2, '',
+			{ font: '30px Arial', fill: '#fff', backgroundColor: '#000' });
+			this.rotateLabel.anchor.setTo(0.5, 0.5);
+			// Call 'orientationChange' when the device is rotated
+			game.scale.onOrientationChange.add(this.orientationChange, this);
+			// Call the function at least once
+			this.orientationChange();
+		}
 
 		//Kill loading label and progressbar when it's done
 		this.loadingLabel.kill();
@@ -57,15 +60,15 @@ var playState = {
 		this.moveEnemy();//move the enemy back and forth
 
 		//add boss health
-		this.bossText = game.add.text(200, 10, "Boss HP: 5000", { font: "18px Arial", fill: "#ffffff"});
+		this.bossText = game.add.text(175, 10, "Boss HP: 5000", { font: "18px Arial", fill: "#ffffff"});
 		this.bossText.fixedToCamera = true;
-		this.bossText.cameraOffset.setTo(200, 10);
+		this.bossText.cameraOffset.setTo(175, 10);
 		game.global.bossHP = 5000;
 
 		//add score
-		this.scoreText = game.add.text(350, 10, "Score: 0", { font: "18px Arial", fill: "#ffffff"});
+		this.scoreText = game.add.text(325, 10, "Nonth\'s Brain: 0", { font: "18px Arial", fill: "#ffffff"});
 		this.scoreText.fixedToCamera = true;
-		this.scoreText.cameraOffset.setTo(400, 10);
+		this.scoreText.cameraOffset.setTo(325, 10);
 		game.global.score = 0;
 
 		//particles for blood explosion
@@ -154,7 +157,7 @@ var playState = {
 						if (game.global.bossHP == 1000) {
 							this.boss.kill();
 							game.global.score += 5000;
-							this.scoreText.text = 'Score: ' + game.global.score;
+							this.scoreText.text = 'Nonth\'s Brain: ' + game.global.score;
 						}
 
 						game.global.bossHP -= 1000;
@@ -174,7 +177,7 @@ var playState = {
 						game.time.events.add(Phaser.Timer.SECOND * .25, function(){
 							this.enemy01.kill();
 							game.global.score += 1000;
-							this.scoreText.text = 'Score: ' + game.global.score;
+							this.scoreText.text = 'Nonth\'s Brain: ' + game.global.score;
 							// Set the position of the emitter
 							this.emitter.x = this.enemy01.x;
 							this.emitter.y = this.enemy01.y;
@@ -188,7 +191,7 @@ var playState = {
 						game.time.events.add(Phaser.Timer.SECOND * .25, function(){
 							this.enemy02.kill();
 							game.global.score += 1000;
-							this.scoreText.text = 'Score: ' + game.global.score;
+							this.scoreText.text = 'Nonth\'s Brain: ' + game.global.score;
 							// Set the position of the emitter
 							this.emitter.x = this.enemy02.x;
 							this.emitter.y = this.enemy02.y;
@@ -204,7 +207,7 @@ var playState = {
 						game.time.events.add(Phaser.Timer.SECOND * .25, function(){
 							this.enemy01.kill();
 							game.global.score += 5000;
-							this.scoreText.text = 'Score: ' + game.global.score;
+							this.scoreText.text = 'Nonth\'s Brain: ' + game.global.score;
 							// Set the position of the emitter
 							this.emitter.x = this.enemy01.x;
 							this.emitter.y = this.enemy01.y;
@@ -411,7 +414,7 @@ var playState = {
 				//when animation is done, do this:
 				this.lightning.animations.currentAnim.onComplete.add(function () {
 					//add a small delay before going idle mode
-					game.time.events.add(Phaser.Timer.SECOND * .5, function(){
+					game.time.events.add(Phaser.Timer.SECOND * .25, function(){
 						this.lightning.kill();//remove the lightning on the player
 						this.boss.animations.play('idle');//play idle animation on boss
 						}, this);
@@ -582,5 +585,20 @@ var playState = {
 		this.sea.fixedToCamera = true;
 		this.sea.tileScale.set(1.1);
 		return;
+	},
+	
+	orientationChange: function() {
+		// If the game is in portrait (wrong orientation)
+		if (game.scale.isPortrait) {
+			// Pause the game and add a text explanation
+			game.paused = true;
+			this.rotateLabel.text = 'rotate your device in landscape';
+		}
+		// If the game is in landscape (good orientation)
+		else {
+			// Resume the game and remove the text
+			game.paused = false;
+			this.rotateLabel.text = '';
+		}
 	},
 }
