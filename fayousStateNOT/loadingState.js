@@ -51,8 +51,13 @@ var loadState = {
 		game.load.audio('Level_4', ['assets/Soundtrack/Level4.mp3', 'assets/Soundtrack/Level4.ogg']);
 		game.load.audio('Level_5', ['assets/Soundtrack/Level5.mp3', 'assets/Soundtrack/Level5.ogg']);
 
-		//// Image
+		//// menu assets
 		game.load.image('menuBackground', 'assets/menupicture.jpg');
+		game.load.image('logo', 'assets/logo.png');
+		game.load.image('newgameLabel', 'assets/newgameLabel.png');
+		game.load.image('gameoverLabel', 'assets/gameoverLabel.png');
+		game.load.image('tryagainLabel', 'assets/tryagainLabel.png');
+		game.load.image('backtomenuLabel', 'assets/backtomenuLabel.png');
 
 	},
 

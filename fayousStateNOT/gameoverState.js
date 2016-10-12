@@ -1,25 +1,22 @@
 var gameoverState = {
 	create: function () {
 
-		var gameoverLabel = game.add.text(game.width / 2, -50, 'Game Over', {
-			font: '50px Helvetica',
-			fill: '#ffffff'
-		});
+		var gameoverLabel = game.add.sprite(game.width/2, 100, 'gameoverLabel');
 		gameoverLabel.anchor.setTo(0.5, 0.5);
 
-		var upLabel = game.add.text(game.width / 2, -50, 'Press Up to Try Again', {
-			font: '20px Helvetica',
-			fill: '#ffffff'
-		});
-		nameLabel.anchor.setTo(0.5, 0.5);
+		var tryagainLabel = game.add.button(game.width/2, game.height-150, 'tryagainLabel', this.retryLevel, this);
+		tryagainLabel.anchor.setTo(0.5, 0.5);
 
-		var downLabel = game.add.text(game.width / 2, -50, 'Press Down to Go Back to Menu', {
-			font: '20px Helvetica',
-			fill: '#ffffff'
-		});
-		nameLabel.anchor.setTo(0.5, 0.5);
+		var backtomenuLabel = game.add.button(game.width/2, game.height-90, 'backtomenuLabel', this.gotoMenu, this);
+		backtomenuLabel.anchor.setTo(0.5, 0.5);
 	},
-	start: function () {
+
+	gotoMenu: function () {
+		game.state.start('menu');
+	},
+
+	retryLevel: function () {
+		game.state.start('play');
 	}
 
 }
