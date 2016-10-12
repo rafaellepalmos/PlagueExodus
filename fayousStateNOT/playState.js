@@ -29,7 +29,7 @@ var playState = {
 		this.player.animations.add('attackright', ['male_melee_slashright01', 'male_melee_slashright02', 'male_melee_slashright03', 'male_melee_slashright04', 'male_melee_slashright05', 'male_melee_slashright06'], 8, false);
 		this.player.animations.add('respawn', ['male_melee_dead05', 'male_melee_dead04', 'male_melee_dead03', 'male_melee_dead02', 'male_melee_dead01', 'male_melee_alive01'], 8, false);
 
-		this.player.anchor.setTo(0.5, 0.5);
+		this.player.anchor.setTo(0.5, 1);
 		game.physics.arcade.enable(this.player);
 		this.player.body.gravity.y = 1000; //used to be 700
 
@@ -120,7 +120,7 @@ var playState = {
 		game.physics.arcade.overlap(this.player, this.enemies, this.playerDie, null, this);
 
 		//player collides with chests
-		game.physics.arcade.overlap(this.player, this.chest, this.chestOpening, null, this);
+		game.physics.arcade.overlap(this.player, this.chests, this.chestOpening, null, this);
 
 		//player collides with portals
 		game.physics.arcade.overlap(this.player, this.portals, this.portalEntering, null, this);
@@ -322,12 +322,11 @@ var playState = {
 
 	chestOpening: function(player, chest) {
 		if (this.input.keyboard.isDown(Phaser.Keyboard.TWO) || this.interact) {
-			if(this.chestOpened == false) {
-				this.chest.animations.play('open');
-				this.chestOpened = true;
+			if(chest.isOpened == false) {
+				chest.animations.play('open');
+				chest.isOpened = true;
 			}
 		}
-		this.chestOpeningEnable = true;
 	},
 
 	portalEntering: function(player, portal) {
@@ -545,16 +544,24 @@ var playState = {
 				this.layer.resizeWorld();
 				this.layer3 = this.map.createLayer('Tile Layer 3');
 				this.map.setCollisionBetween(1, 1159, true, this.layer);
-				this.playerBirthPlaceX = 16;
-				this.playerBirthPlaceY = 1880;
-//				this.playerBirthPlaceX = 7156; // Latte tests the chest at the end of the map
-//				this.playerBirthPlaceY = 1469;
+//				this.playerBirthPlaceX = 16;
+//				this.playerBirthPlaceY = 1880;
+				this.playerBirthPlaceX = 959; // Latte tests the chest at the end of the map
+				this.playerBirthPlaceY = 1741;
 				this.deadLine = 2100;
-//				this.chest = game.add.sprite(7156, 1520, 'purple_chest', 'purple_chest_01');
-//				this.chest.animations.add('open', ['purple_chest_02', 'purple_chest_03', 'purple_chest_04'], 8, false);
-//				this.chest.anchor.setTo(0.5, 1);
-//				this.chestOpened = false;
-//				game.physics.arcade.enable(this.chest);
+				//adding chests
+				this.chest01 = game.add.sprite(976, 1790, 'purple_chest', 'purple_chest_01');
+				this.chests.add(this.chest01);
+				this.chest01.animations.add('open', ['purple_chest_02', 'purple_chest_03', 'purple_chest_04'], 8, false);
+				this.chest01.anchor.setTo(0.5, 1);
+				this.chest01.isOpened = false;
+				this.chest01.getScore = 1000;
+				this.chest02 = game.add.sprite(2283, 1599, 'purple_chest', 'purple_chest_01');
+				this.chests.add(this.chest02);
+				this.chest02.animations.add('open', ['purple_chest_02', 'purple_chest_03', 'purple_chest_04'], 8, false);
+				this.chest02.anchor.setTo(0.5, 1);
+				this.chest02.isOpened = false;
+				this.chest02.getScore = 1000;
 				//adding portal
 				this.portal01 = game.add.sprite(7135, 1475, 'portal', 'portal_01');
 				this.portals.add(this.portal01);
@@ -688,6 +695,9 @@ var playState = {
 		//show portals at front, add physics
 		game.world.bringToTop(this.portals);
 		game.physics.arcade.enable(this.portals);
+		//show chests at front, add physics
+		game.world.bringToTop(this.chests);
+		game.physics.arcade.enable(this.chests);
 		//set up some bg image
 		this.sky.fixedToCamera = true;
 		this.sky.tileScale.set(1.5);
