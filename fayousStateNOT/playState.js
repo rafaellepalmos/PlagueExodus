@@ -119,6 +119,15 @@ var playState = {
 		//player collides with enemies
 		game.physics.arcade.overlap(this.player, this.enemies, this.playerDie, null, this);
 
+<<<<<<< HEAD
+=======
+		//player collides with chests
+		game.physics.arcade.overlap(this.player, this.chest, this.chestOpening, null, this);
+
+		//player collides with portals
+		game.physics.arcade.overlap(this.player, this.portals, this.portalEntering, null, this);
+
+>>>>>>> parent of d38316f... added story to game state
 		//Set parallex backgrounds
 		this.clouds.tilePosition.set(this.clouds.x * -0.1, 0);
 		this.sea.tilePosition.set(this.sea.x * -0.15, 0);
@@ -274,8 +283,12 @@ var playState = {
 		//check if jump button is pressed
 =======
 		if ((this.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR) || this.jump) && this.player.body.onFloor()) {
+<<<<<<< HEAD
 			this.player.body.velocity.y = -400;
 >>>>>>> origin/gh-pages
+=======
+			this.player.body.velocity.y = -500;
+>>>>>>> parent of d38316f... added story to game state
 		}
 	},
 
@@ -315,6 +328,25 @@ var playState = {
 		}
 	},
 
+<<<<<<< HEAD
+=======
+	chestOpening: function(player, chest) {
+		if (this.input.keyboard.isDown(Phaser.Keyboard.TWO) || this.interact) {
+			if(this.chestOpened == false) {
+				this.chest.animations.play('open');
+				this.chestOpened = true;
+			}
+		}
+		this.chestOpeningEnable = true;
+	},
+
+	portalEntering: function(player, portal) {
+		if (this.input.keyboard.isDown(Phaser.Keyboard.TWO) || this.interact) {
+			this.changeLevel(portal.gotoLevel);
+		}
+	},
+
+>>>>>>> parent of d38316f... added story to game state
 	addEnemy: function() {
 		this.enemies = game.add.group();
 
@@ -458,6 +490,11 @@ var playState = {
 		}
 	},
 
+	changeLevel: function(level) {
+		game.global.playLevel = level;
+		game.state.start('play');
+	},
+
 	render: function () {
 		game.debug.bodyInfo(this.player, 32, 32);
 	},
@@ -502,6 +539,9 @@ var playState = {
 
 	drawMap: function () {
 
+		this.portals = game.add.group();
+		this.chests = game.add.group();
+
 		//Use global variable "playLevel" to select Level
 		switch (game.global.playLevel) {
 			default:
@@ -519,6 +559,22 @@ var playState = {
 				this.playerBirthPlaceX = 16;
 				this.playerBirthPlaceY = 1880;
 				this.deadLine = 2100;
+<<<<<<< HEAD
+=======
+//				this.chest = game.add.sprite(7156, 1520, 'purple_chest', 'purple_chest_01');
+//				this.chest.animations.add('open', ['purple_chest_02', 'purple_chest_03', 'purple_chest_04'], 8, false);
+//				this.chest.anchor.setTo(0.5, 1);
+//				this.chestOpened = false;
+//				game.physics.arcade.enable(this.chest);
+				//adding portal
+				this.portal01 = game.add.sprite(7135, 1475, 'portal', 'portal_01');
+				this.portals.add(this.portal01);
+				this.portal01.animations.add('loop', ['portal_01', 'portal_02', 'portal_03', 'portal_04'], 8, true);
+				this.portal01.animations.play('loop');
+				this.portal01.anchor.setTo(0.5, 0.5);
+				this.portal01.gotoLevel = 2;
+				//adding music
+>>>>>>> parent of d38316f... added story to game state
 				this.bgMusic = game.add.audio('Level_1');
 				this.bgMusic.loop = true;
 				this.bgMusic.play();
@@ -537,7 +593,16 @@ var playState = {
 				this.map.setCollisionBetween(1, 1159, true, this.layer);
 				this.playerBirthPlaceX = 16;
 				this.playerBirthPlaceY = 1880;
+//				this.playerBirthPlaceX = 7812;	//Latte uses these to test portal
+//				this.playerBirthPlaceY = 989;
 				this.deadLine = 2100;
+				//adding portal
+				this.portal01 = game.add.sprite(7825, 995, 'portal', 'portal_01');
+				this.portals.add(this.portal01);
+				this.portal01.animations.add('loop', ['portal_01', 'portal_02', 'portal_03', 'portal_04'], 8, true);
+				this.portal01.animations.play('loop');
+				this.portal01.anchor.setTo(0.5, 0.5);
+				this.portal01.gotoLevel = 3;
 				break;
 
 			case 3:
@@ -553,7 +618,16 @@ var playState = {
 				this.map.setCollisionBetween(1, 1159, true, this.layer);
 				this.playerBirthPlaceX = 16;
 				this.playerBirthPlaceY = 1880;
+//				this.playerBirthPlaceX = 5514;	////Latte uses these to test portal
+//				this.playerBirthPlaceY = 1229;
 				this.deadLine = 2100;
+				//adding portal
+				this.portal01 = game.add.sprite(5535, 1235, 'portal', 'portal_01');
+				this.portals.add(this.portal01);
+				this.portal01.animations.add('loop', ['portal_01', 'portal_02', 'portal_03', 'portal_04'], 8, true);
+				this.portal01.animations.play('loop');
+				this.portal01.anchor.setTo(0.5, 0.5);
+				this.portal01.gotoLevel = 4;
 				break;
 
 			case 4:
@@ -585,10 +659,23 @@ var playState = {
 				this.map.setCollisionBetween(1, 1159, true, this.layer);
 				this.playerBirthPlaceX = 1082.67;
 				this.playerBirthPlaceY = 1245;
+//				this.playerBirthPlaceX = 2914;
+//				this.playerBirthPlaceY = 3053;
 				this.deadLine = 150000;
 				this.bgMusic = game.add.audio('Level_5');
 				this.bgMusic.loop = true;
 				this.bgMusic.play();
+				//add portals
+				this.portal01 = game.add.sprite(1102, 1250, 'portal', 'portal_01');
+				this.portals.add(this.portal01);
+				this.portal01.animations.add('loop', ['portal_01', 'portal_02', 'portal_03', 'portal_04'], 8, true);
+				this.portal01.animations.play('loop');
+				this.portal01.anchor.setTo(0.5, 0.5);
+				this.portal02 = game.add.sprite(3008, 3060, 'portal', 'portal_01');
+				this.portals.add(this.portal02);
+				this.portal02.animations.add('loop', ['portal_01', 'portal_02', 'portal_03', 'portal_04'], 8, true);
+				this.portal02.animations.play('loop');
+				this.portal02.anchor.setTo(0.5, 0.5);
 				break;
 			case 6:
 				this.map = game.add.tilemap('map-6');
@@ -603,6 +690,9 @@ var playState = {
 				this.deadLine = 15000;
 				break;
 		}
+		//show portals at front, add physics
+		game.world.bringToTop(this.portals);
+		game.physics.arcade.enable(this.portals);
 		//set up some bg image
 		this.sky.fixedToCamera = true;
 		this.sky.tileScale.set(1.5);
