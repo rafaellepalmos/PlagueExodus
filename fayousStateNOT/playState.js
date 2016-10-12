@@ -256,7 +256,7 @@ var playState = {
 		}
 		//check if jump button is pressed
 		if (this.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR) && this.player.body.onFloor()) {
-			this.player.body.velocity.y = -400;
+			this.player.body.velocity.y = -500;
 		}
 	},
 
@@ -465,7 +465,7 @@ var playState = {
 
 			case 4:
 				game.load.image('tileset-1', 'assets/platforms/set-1/tileset-1.png');
-				game.load.tilemap('map-4', 'assets/platforms/set-1/map-4Puzzle.json', null, Phaser.Tilemap.TILED_JSON);
+				game.load.tilemap('map-4', 'assets/platforms/set-1/Level4Puzzle.json', null, Phaser.Tilemap.TILED_JSON);
 				break;
 
 			case 5:
@@ -500,6 +500,9 @@ var playState = {
 				this.playerBirthPlaceX = 16;
 				this.playerBirthPlaceY = 1880;
 				this.deadLine = 2100;
+				this.bgMusic = game.add.audio('Level_1');
+				this.bgMusic.loop = true;
+				this.bgMusic.play();
 				break;
 
 			case 2:
@@ -548,6 +551,9 @@ var playState = {
 				this.playerBirthPlaceX = 1740;
 				this.playerBirthPlaceY = 7965;
 				this.deadLine = 15000;
+				this.bgMusic = game.add.audio('Level_4');
+				this.bgMusic.loop = true;
+				this.bgMusic.play();
 				break;
 
 			case 5:
@@ -561,6 +567,9 @@ var playState = {
 				this.playerBirthPlaceX = 1082.67;
 				this.playerBirthPlaceY = 1245;
 				this.deadLine = 150000;
+				this.bgMusic = game.add.audio('Level_5');
+				this.bgMusic.loop = true;
+				this.bgMusic.play();
 				break;
 			case 6:
 				this.map = game.add.tilemap('map-6');
