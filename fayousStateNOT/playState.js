@@ -83,13 +83,8 @@ var playState = {
 		//Set player collides with layer 1 of tilemap
 		game.physics.arcade.collide(this.player, this.layer);
 		game.physics.arcade.collide(this.enemies, this.layer);
-<<<<<<< HEAD
 		game.physics.arcade.collide(this.enemy01, this.layer);
 
-=======
-		//game.physics.arcade.collide(this.enemy01, this.layer);
-
->>>>>>> 025ae175b93f5e6c465c138007c95b989d0c3262
 		//Call movePlayer function
 		this.movePlayer();
 
