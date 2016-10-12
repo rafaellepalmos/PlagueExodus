@@ -280,7 +280,7 @@ var playState = {
 		}
 		//check if jump button is pressed
 		if ((this.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR) || this.jump) && this.player.body.onFloor()) {
-			this.player.body.velocity.y = -400;
+			this.player.body.velocity.y = -500;
 		}
 	},
 

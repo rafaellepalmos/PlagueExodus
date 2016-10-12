@@ -21,6 +21,7 @@ var loadState = {
 		game.load.atlasJSONArray('curupira', 'assets/curupira.png', 'assets/curupira.json');
 		game.load.atlasJSONArray('woodie', 'assets/woodie.png', 'assets/woodie.json');
 		game.load.atlasJSONArray('banshee', 'assets/banshee.png', 'assets/banshee.json');
+		game.load.atlasJSONArray('wolfie', 'assets/wolf.png', 'assets/wolf.json');
 		game.load.image('blood', 'assets/blood.png');
 
 		//chest atlas
