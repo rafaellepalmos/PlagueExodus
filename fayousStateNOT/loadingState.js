@@ -25,6 +25,8 @@ var loadState = {
 
 		//chest atlas
 		game.load.atlasJSONArray('purple_chest', 'assets/purple_chest.png', 'assets/purple_chest.json');
+		//portal
+		game.load.atlasJSONArray('portal', 'assets/portal.png', 'assets/portal.json');
 
 		//asset for play state
 		game.load.image('cloud', 'assets/platforms/set-1/clouds.png');
@@ -34,7 +36,7 @@ var loadState = {
 		game.load.image('sky_dark', 'assets/platforms/set-1/sky_dark.png');
 		game.load.image('sea_dark', 'assets/platforms/set-1/sea_dark.png');
 		game.load.image('enemy', 'assets/enemy.png');
-		
+
 		//Buttons
 		game.load.image('upButton', 'assets/buttons/upButton.png');
 		game.load.image('rightButton', 'assets/buttons/rightButton.png');
