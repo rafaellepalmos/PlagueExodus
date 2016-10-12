@@ -94,6 +94,7 @@ var playState = {
 
 		//audio effect
 		this.hit_1_Sound = game.add.audio('hit_1');
+		this.enemy_hit_1_Sound = game.add.audio('enemy_hit_1');
 		this.lightningSound = game.add.audio('lightning');
 		this.treasureSound = game.add.audio('treasure_opening');
 
@@ -320,20 +321,21 @@ var playState = {
 		}
 	},
 
-	heartReduce: function() {
-		game.global.playerhp -= 1;
-		if (game.global.playerhp > 0){
-			console.log("Health: " + game.global.playerhp);
-			this.health.frameName = 'health' + game.global.playerhp;
-			game.camera.shake(0.01, 200);
-		}
-		else {
-			this.playerRespawn();
-		}
-	},
+//	heartReduce: function() {
+//		game.global.playerhp -= 1;
+//		if (game.global.playerhp > 0){
+//			console.log("Health: " + game.global.playerhp);
+//			this.health.frameName = 'health' + game.global.playerhp;
+//			game.camera.shake(0.01, 200);
+//		}
+//		else {
+//			this.playerDie();
+//		}
+//	},
 
 	playerDamaged: function() {
 		if(this.playerImmortal == false) {
+			this.enemy_hit_1_Sound.play();
 			this.blinkTimmer = game.time.events.loop(Phaser.Timer.SECOND/5, this.playerBlink, this);
 			game.time.events.add(Phaser.Timer.SECOND*3, this.playerStopBlink, this);
 			this.playerImmortal = true;
@@ -532,7 +534,7 @@ var playState = {
 				game.time.events.add(Phaser.Timer.SECOND * 1, function(){
 					this.lightning.reset(this.player.position.x-10, this.player.position.y-90)//spawn lightning at the player position
 					this.lightning.animations.play('lightning');//play lightning animation
-					this.heartReduce();//hurt the player
+					this.playerDamaged();//hurt the player
 					this.lightningSound.play();
 				}, this);
 
