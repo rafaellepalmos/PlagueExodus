@@ -120,7 +120,9 @@ var playState = {
 		game.physics.arcade.collide(this.enemies, this.layer);
 
 		//check for boss distance
-		game.global.bossdist = this.boss.position.x - this.player.position.x;
+		if (this.boss != null) {
+			game.global.bossdist = this.boss.position.x - this.player.position.x;
+		}
 
 		//Call movePlayer function
 		this.movePlayer();
@@ -365,6 +367,7 @@ var playState = {
 	},
 
 	playerDie: function() {
+		this.bgMusic.stop();
 		game.state.start('gameover');
 //		this.playerRespawn();
 	},
@@ -386,6 +389,8 @@ var playState = {
 				chest.animations.play('open');
 				this.treasureSound.play();
 				chest.isOpened = true;
+				game.global.score += chest.getScore;
+				this.scoreText.text = 'Nonth\'s Brain: ' + game.global.score;
 			}
 		}
 	},
@@ -398,6 +403,7 @@ var playState = {
 
 	changeLevel: function(level) {
 		game.global.playLevel = level;
+		this.bgMusic.stop();
 		game.state.start('play');
 	},
 
