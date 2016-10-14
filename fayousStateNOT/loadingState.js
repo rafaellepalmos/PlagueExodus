@@ -64,6 +64,9 @@ var loadState = {
 		game.load.image('tryagainLabel', 'assets/tryagainLabel.png');
 		game.load.image('backtomenuLabel', 'assets/backtomenuLabel.png');
 
+		//video
+		game.load.video('video', 'assets/game.mp4');
+
 	},
 
 	create: function () {
