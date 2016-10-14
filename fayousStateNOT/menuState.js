@@ -28,6 +28,7 @@ var menuState = {
 	},
 
 	start: function () {
+		game.global.playLevel = 1;
 		this.bgMusic.stop();
 		game.state.start('play');
 //		game.state.start('gameover'); //test gameover state

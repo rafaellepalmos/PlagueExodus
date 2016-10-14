@@ -397,7 +397,13 @@ var playState = {
 
 	portalEntering: function(player, portal) {
 		if (this.input.keyboard.isDown(Phaser.Keyboard.TWO) || this.interact) {
-			this.changeLevel(portal.gotoLevel);
+			if(portal.gotoLevel > 0 && portal.gotoLevel <= 6) {
+				this.changeLevel(portal.gotoLevel);
+			}
+			else if (portal.gotoLevel > 6){
+				this.bgMusic.stop();
+				game.state.start('end');
+			}
 		}
 	},
 
@@ -704,6 +710,9 @@ var playState = {
 //				this.playerBirthPlaceX = 7812;	//Latte uses these to test portal
 //				this.playerBirthPlaceY = 989;
 				this.deadLine = 2100;
+				this.bgMusic = game.add.audio('Level_1');
+				this.bgMusic.loop = true;
+				this.bgMusic.play();
 				//adding portal
 				this.portal01 = game.add.sprite(7825, 995, 'portal', 'portal_01');
 				this.portals.add(this.portal01);
@@ -729,6 +738,9 @@ var playState = {
 //				this.playerBirthPlaceX = 5514;	////Latte uses these to test portal
 //				this.playerBirthPlaceY = 1229;
 				this.deadLine = 2100;
+				this.bgMusic = game.add.audio('Level_1');
+				this.bgMusic.loop = true;
+				this.bgMusic.play();
 				//adding portal
 				this.portal01 = game.add.sprite(5535, 1235, 'portal', 'portal_01');
 				this.portals.add(this.portal01);
@@ -751,10 +763,25 @@ var playState = {
 				this.map.setCollisionBetween(1, 1159, true, this.layer);
 				this.playerBirthPlaceX = 1740;
 				this.playerBirthPlaceY = 7965;
-				this.deadLine = 15000;
+//				this.playerBirthPlaceX = 1192; //testing
+//				this.playerBirthPlaceY = 10269;
+				this.deadLine = 12000;
 				this.bgMusic = game.add.audio('Level_4');
 				this.bgMusic.loop = true;
 				this.bgMusic.play();
+				//adding portal
+				this.portal01 = game.add.sprite(2381, 7270, 'portal', 'portal_01');
+				this.portals.add(this.portal01);
+				this.portal01.animations.add('loop', ['portal_01', 'portal_02', 'portal_03', 'portal_04'], 8, true);
+				this.portal01.animations.play('loop');
+				this.portal01.anchor.setTo(0.5, 0.5);
+				this.portal01.gotoLevel = 5;
+				this.portal02 = game.add.sprite(1200, 10275, 'portal', 'portal_01');
+				this.portals.add(this.portal02);
+				this.portal02.animations.add('loop', ['portal_01', 'portal_02', 'portal_03', 'portal_04'], 8, true);
+				this.portal02.animations.play('loop');
+				this.portal02.anchor.setTo(0.5, 0.5);
+				this.portal02.gotoLevel = 6;
 				break;
 
 			case 5:
@@ -777,16 +804,17 @@ var playState = {
 				this.bgMusic.loop = true;
 				this.bgMusic.play();
 				//add portals
-				this.portal01 = game.add.sprite(1102, 1250, 'portal', 'portal_01');
-				this.portals.add(this.portal01);
-				this.portal01.animations.add('loop', ['portal_01', 'portal_02', 'portal_03', 'portal_04'], 8, true);
-				this.portal01.animations.play('loop');
-				this.portal01.anchor.setTo(0.5, 0.5);
+//				this.portal01 = game.add.sprite(1102, 1250, 'portal', 'portal_01');
+//				this.portals.add(this.portal01);
+//				this.portal01.animations.add('loop', ['portal_01', 'portal_02', 'portal_03', 'portal_04'], 8, true);
+//				this.portal01.animations.play('loop');
+//				this.portal01.anchor.setTo(0.5, 0.5);
 				this.portal02 = game.add.sprite(3008, 3060, 'portal', 'portal_01');
 				this.portals.add(this.portal02);
 				this.portal02.animations.add('loop', ['portal_01', 'portal_02', 'portal_03', 'portal_04'], 8, true);
 				this.portal02.animations.play('loop');
 				this.portal02.anchor.setTo(0.5, 0.5);
+				this.portal02.gotoLevel = 4;
 				break;
 
 			case 6:
@@ -802,7 +830,18 @@ var playState = {
 				this.map.setCollisionBetween(1, 1159, true, this.layer);
 				this.playerBirthPlaceX = 2704;
 				this.playerBirthPlaceY = 1533;
-				this.deadLine = 15000;
+//				this.playerBirthPlaceX = 2338;
+//				this.playerBirthPlaceY = 1517;
+				this.deadLine = 3000;
+				this.bgMusic = game.add.audio('Level_5');
+				this.bgMusic.loop = true;
+				this.bgMusic.play();
+				this.portal01 = game.add.sprite(2348, 1519, 'portal', 'portal_01');
+				this.portals.add(this.portal01);
+				this.portal01.animations.add('loop', ['portal_01', 'portal_02', 'portal_03', 'portal_04'], 8, true);
+				this.portal01.animations.play('loop');
+				this.portal01.anchor.setTo(0.5, 0.5);
+				this.portal01.gotoLevel = 7;
 				break;
 		}
 		//show portals at front, add physics
