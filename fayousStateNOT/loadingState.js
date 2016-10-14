@@ -51,10 +51,10 @@ var loadState = {
 		game.load.audio('Level_4', ['assets/Soundtrack/Level4.mp3', 'assets/Soundtrack/Level4.ogg']);
 		game.load.audio('Level_5', ['assets/Soundtrack/Level5.mp3', 'assets/Soundtrack/Level5.ogg']);
 		//effect
-		game.load.audio('hit_1', ['assets/sound/hit_01.mp3', 'assets/sound/hit_01.ogg']);
-		game.load.audio('enemy_hit_1', ['assets/sound/enemy_hit_01.mp3', 'assets/sound/enemy_hit_01.ogg']);
-		game.load.audio('lightning', ['assets/sound/lightning.mp3', 'assets/sound/lightning.ogg']);
-		game.load.audio('treasure_opening', ['assets/sound/treasure_opening.mp3', 'assets/sound/treasure_opening.ogg']);
+		game.load.audio('hit_1', ['assets/sound/hit_01.mp3', 'assets/Sound/hit_01.ogg']);
+		game.load.audio('enemy_hit_1', ['assets/sound/enemy_hit_01.mp3', 'assets/Sound/enemy_hit_01.ogg']);
+		game.load.audio('lightning', ['assets/sound/lightning.mp3', 'assets/Sound/lightning.ogg']);
+		game.load.audio('treasure_opening', ['assets/sound/treasure_opening.mp3', 'assets/Sound/treasure_opening.ogg']);
 
 		//// menu assets
 		game.load.image('menuBackground', 'assets/menupicture.jpg');

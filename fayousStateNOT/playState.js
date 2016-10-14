@@ -602,9 +602,9 @@ var playState = {
 		}
 	},
 
-	render: function () {
-		game.debug.bodyInfo(this.player, 32, 32);
-	},
+//	render: function () {
+//		game.debug.bodyInfo(this.player, 32, 32);
+//	},
 
 	loadMap: function(){
 		//Use global variable "playLevel" to select Level
